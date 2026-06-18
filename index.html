@@ -172,6 +172,73 @@ footer p{font-size:0.5rem;letter-spacing:3px;color:#222233;margin-top:8px;}
     <div class="founder-quote">"I am 10 years old and I am building a new civilization for kids.<br><br>Not a website. Not a game. A whole new way of living — where every kid matters, every voice is heard, and kindness is the law.<br><br>This is just the beginning."</div>
   </div>
 </section>
+<!-- KR COINS & KID NEWS -->
+<section id="krcoins" style="padding:100px 20px;border-top:1px solid #ffcc0022;position:relative;z-index:1;">
+  <div style="text-align:center;margin-bottom:60px;">
+    <div style="font-size:clamp(1.2rem,5vw,2.5rem);font-weight:900;letter-spacing:8px;margin-bottom:8px;background:linear-gradient(135deg,#ffcc00,#ffaa00);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">💰 KR COINS</div>
+    <div style="font-size:0.55rem;letter-spacing:5px;color:#333355;">EARN COINS. DO GOOD. BE LEGENDARY.</div>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;max-width:900px;margin:0 auto 48px;">
+    <div style="background:rgba(255,204,0,0.05);border:1px solid rgba(255,204,0,0.12);border-radius:20px;padding:28px;text-align:center;">
+      <div style="font-size:2.5rem;margin-bottom:12px;">💛</div>
+      <div style="font-size:0.7rem;font-weight:900;letter-spacing:4px;color:#ffcc00;margin-bottom:8px;">DO A KIND ACT</div>
+      <div style="font-size:0.55rem;letter-spacing:2px;color:#555544;margin-bottom:16px;">Stand up for someone, help a friend, be nice to a disabled kid</div>
+      <div style="font-size:1.5rem;font-weight:900;color:#ffcc00;">+10 KR COINS</div>
+    </div>
+    <div style="background:rgba(255,204,0,0.05);border:1px solid rgba(255,204,0,0.12);border-radius:20px;padding:28px;text-align:center;">
+      <div style="font-size:2.5rem;margin-bottom:12px;">📰</div>
+      <div style="font-size:0.7rem;font-weight:900;letter-spacing:4px;color:#ffcc00;margin-bottom:8px;">REPORT NEWS</div>
+      <div style="font-size:0.55rem;letter-spacing:2px;color:#555544;margin-bottom:16px;">Submit a news story that gets published on Kid News Network</div>
+      <div style="font-size:1.5rem;font-weight:900;color:#ffcc00;">+25 KR COINS</div>
+    </div>
+    <div style="background:rgba(255,204,0,0.05);border:1px solid rgba(255,204,0,0.12);border-radius:20px;padding:28px;text-align:center;">
+      <div style="font-size:2.5rem;margin-bottom:12px;">🎮</div>
+      <div style="font-size:0.7rem;font-weight:900;letter-spacing:4px;color:#ffcc00;margin-bottom:8px;">BUILD SOMETHING</div>
+      <div style="font-size:0.55rem;letter-spacing:2px;color:#555544;margin-bottom:16px;">Create a game, app, art, or project and share it with KidRising</div>
+      <div style="font-size:1.5rem;font-weight:900;color:#ffcc00;">+50 KR COINS</div>
+    </div>
+  </div>
+  <!-- Coin Claim -->
+  <div style="max-width:500px;margin:0 auto;background:rgba(255,204,0,0.03);border:1px solid rgba(255,204,0,0.15);border-radius:24px;padding:36px;">
+    <div style="text-align:center;margin-bottom:24px;font-size:0.7rem;letter-spacing:4px;color:#ffcc00;">⚡ CLAIM YOUR COINS</div>
+    <input id="coin-name" type="text" placeholder="Your name" style="width:100%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:50px;padding:14px 20px;color:#fff;font-size:0.65rem;letter-spacing:2px;font-family:'Courier New',monospace;outline:none;margin-bottom:10px;">
+    <select id="coin-act" style="width:100%;background:#0a0a14;border:1px solid rgba(255,255,255,0.1);border-radius:50px;padding:14px 20px;color:#fff;font-size:0.65rem;letter-spacing:2px;font-family:'Courier New',monospace;outline:none;margin-bottom:10px;">
+      <option value="10">💛 Did a kind act (+10 coins)</option>
+      <option value="25">📰 Reported news (+25 coins)</option>
+      <option value="50">🎮 Built something (+50 coins)</option>
+    </select>
+    <input id="coin-desc" type="text" placeholder="What did you do?" style="width:100%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:50px;padding:14px 20px;color:#fff;font-size:0.65rem;letter-spacing:2px;font-family:'Courier New',monospace;outline:none;margin-bottom:16px;">
+    <button onclick="claimCoins()" style="width:100%;padding:16px;background:linear-gradient(135deg,#ffcc00,#ffaa00);border:none;color:#000;font-size:0.8rem;font-weight:900;letter-spacing:5px;cursor:pointer;border-radius:50px;font-family:'Courier New',monospace;">💰 CLAIM COINS</button>
+    <div id="coin-confirm" style="display:none;text-align:center;margin-top:16px;font-size:0.65rem;letter-spacing:3px;color:#ffcc00;"></div>
+  </div>
+  <!-- Leaderboard -->
+  <div style="max-width:500px;margin:40px auto 0;">
+    <div style="text-align:center;font-size:0.6rem;letter-spacing:5px;color:#333355;margin-bottom:20px;">🏆 TOP COIN HOLDERS</div>
+    <div id="coin-board"></div>
+  </div>
+</section>
+
+<section id="kidnews" style="padding:100px 20px;border-top:1px solid #4488ff22;position:relative;z-index:1;">
+  <div style="text-align:center;margin-bottom:60px;">
+    <div style="font-size:clamp(1.2rem,5vw,2.5rem);font-weight:900;letter-spacing:8px;margin-bottom:8px;background:linear-gradient(135deg,#4488ff,#cc44ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">📡 KID NEWS NETWORK</div>
+    <div style="font-size:0.55rem;letter-spacing:5px;color:#333355;">NEWS BY KIDS. FOR KIDS. NO ADULTS.</div>
+  </div>
+  <!-- Submit Story -->
+  <div style="max-width:600px;margin:0 auto 60px;background:rgba(68,136,255,0.03);border:1px solid rgba(68,136,255,0.15);border-radius:24px;padding:36px;">
+    <div style="font-size:0.65rem;letter-spacing:4px;color:#4488ff;margin-bottom:20px;">📰 SUBMIT YOUR STORY</div>
+    <input id="news-name" type="text" placeholder="Your name" style="width:100%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:50px;padding:14px 20px;color:#fff;font-size:0.65rem;letter-spacing:2px;font-family:'Courier New',monospace;outline:none;margin-bottom:10px;">
+    <input id="news-headline" type="text" placeholder="Headline (make it big!)" style="width:100%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:50px;padding:14px 20px;color:#fff;font-size:0.65rem;letter-spacing:2px;font-family:'Courier New',monospace;outline:none;margin-bottom:10px;">
+    <textarea id="news-story" placeholder="Tell the full story..." style="width:100%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:20px;padding:16px 20px;color:#fff;font-size:0.65rem;letter-spacing:2px;font-family:'Courier New',monospace;outline:none;margin-bottom:16px;height:120px;resize:none;"></textarea>
+    <button onclick="submitNews()" style="width:100%;padding:16px;background:linear-gradient(135deg,#4488ff,#cc44ff);border:none;color:#fff;font-size:0.8rem;font-weight:900;letter-spacing:5px;cursor:pointer;border-radius:50px;font-family:'Courier New',monospace;">📡 PUBLISH STORY</button>
+    <div id="news-confirm" style="display:none;text-align:center;margin-top:16px;font-size:0.65rem;letter-spacing:3px;color:#4488ff;"></div>
+  </div>
+  <!-- News Feed -->
+  <div style="max-width:700px;margin:0 auto;">
+    <div style="text-align:center;font-size:0.6rem;letter-spacing:5px;color:#333355;margin-bottom:24px;">📰 LATEST STORIES</div>
+    <div id="news-feed"></div>
+  </div>
+</section>
+
 <section id="join">
   <div class="join-title">JOIN THE RISING</div>
   <div class="join-sub">BE PART OF SOMETHING BIGGER THAN ANYTHING</div>
@@ -224,6 +291,57 @@ function spawnParticle(){
   document.body.appendChild(p);setTimeout(()=>p.remove(),(Math.random()*6+5)*1000);
 }
 setInterval(spawnParticle,600);
+
+// KR COINS
+let coins=JSON.parse(localStorage.getItem('kr_coins')||'[]');
+function renderCoinBoard(){
+  const board=document.getElementById('coin-board');
+  if(!coins.length){board.innerHTML='<div style="text-align:center;font-size:0.55rem;letter-spacing:3px;color:#222233;">No coin holders yet. Be the first!</div>';return;}
+  const totals={};
+  coins.forEach(c=>{totals[c.name]=(totals[c.name]||0)+c.amount;});
+  const sorted=Object.entries(totals).sort((a,b)=>b[1]-a[1]).slice(0,10);
+  board.innerHTML=sorted.map(([name,amt],i)=>`<div style="display:flex;align-items:center;justify-content:space-between;padding:12px 20px;margin-bottom:8px;background:rgba(255,204,0,0.04);border:1px solid rgba(255,204,0,0.08);border-radius:12px;"><span style="font-size:0.6rem;letter-spacing:3px;color:#ffcc00;">${['🥇','🥈','🥉'][i]||'⭐'} ${name.toUpperCase()}</span><span style="font-size:0.8rem;font-weight:900;color:#ffcc00;">${amt} COINS</span></div>`).join('');
+}
+function claimCoins(){
+  const name=document.getElementById('coin-name').value.trim();
+  const amount=parseInt(document.getElementById('coin-act').value);
+  const desc=document.getElementById('coin-desc').value.trim();
+  if(!name||!desc){alert('Fill in your name and what you did!');return;}
+  coins.push({name,amount,desc,date:new Date().toLocaleDateString()});
+  localStorage.setItem('kr_coins',JSON.stringify(coins));
+  renderCoinBoard();
+  const c=document.getElementById('coin-confirm');
+  c.style.display='block';
+  c.innerHTML=`💰 +${amount} KR COINS ADDED, ${name.toUpperCase()}!`;
+  document.getElementById('coin-name').value='';
+  document.getElementById('coin-desc').value='';
+  for(let i=0;i<8;i++)spawnParticle();
+}
+renderCoinBoard();
+
+// KID NEWS
+let news=JSON.parse(localStorage.getItem('kr_news')||'[]');
+function renderNews(){
+  const feed=document.getElementById('news-feed');
+  if(!news.length){feed.innerHTML='<div style="text-align:center;font-size:0.55rem;letter-spacing:3px;color:#222233;">No stories yet. Be the first reporter!</div>';return;}
+  feed.innerHTML=[...news].reverse().map(n=>`<div style="background:rgba(68,136,255,0.03);border:1px solid rgba(68,136,255,0.1);border-radius:16px;padding:24px;margin-bottom:16px;"><div style="font-size:0.5rem;letter-spacing:4px;color:#4488ff88;margin-bottom:8px;">📡 ${n.date} · BY ${n.name.toUpperCase()}</div><div style="font-size:0.9rem;font-weight:900;letter-spacing:3px;color:#fff;margin-bottom:12px;">${n.headline}</div><div style="font-size:0.6rem;letter-spacing:2px;color:#6677aa;line-height:2;">${n.story}</div></div>`).join('');
+}
+function submitNews(){
+  const name=document.getElementById('news-name').value.trim();
+  const headline=document.getElementById('news-headline').value.trim();
+  const story=document.getElementById('news-story').value.trim();
+  if(!name||!headline||!story){alert('Fill in everything!');return;}
+  news.push({name,headline,story,date:new Date().toLocaleDateString()});
+  localStorage.setItem('kr_news',JSON.stringify(news));
+  renderNews();
+  const c=document.getElementById('news-confirm');
+  c.style.display='block';
+  c.innerHTML=`📡 STORY PUBLISHED! +25 KR COINS EARNED!`;
+  document.getElementById('news-name').value='';
+  document.getElementById('news-headline').value='';
+  document.getElementById('news-story').value='';
+}
+renderNews();
 </script>
 </body>
 </html>
