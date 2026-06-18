@@ -6,6 +6,8 @@
 <title>KidRising — A New World Built By Kids</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
+#age-gate{position:fixed;inset:0;z-index:9999;background:#030308;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:20px;}
+#age-blocked{position:fixed;inset:0;z-index:9999;background:#030308;display:none;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:20px;}
 :root{--gold:#ffcc00;--red:#ff4444;--blue:#4488ff;--purple:#cc44ff;--green:#44ffaa;--pink:#ff44aa;}
 body{background:#030308;color:#fff;font-family:'Courier New',monospace;overflow-x:hidden;}
 canvas{position:fixed;inset:0;z-index:0;pointer-events:none;}
@@ -79,6 +81,23 @@ footer p{font-size:0.5rem;letter-spacing:3px;color:#222233;margin-top:8px;}
 </style>
 </head>
 <body>
+<div id="age-gate">
+  <div style="font-size:4rem;margin-bottom:16px;">⚡</div>
+  <div style="font-size:clamp(1.5rem,6vw,3rem);font-weight:900;letter-spacing:8px;background:linear-gradient(135deg,#ffcc00,#ff4444);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:8px;">KIDRISING</div>
+  <div style="font-size:0.6rem;letter-spacing:5px;color:#555577;margin-bottom:48px;">A NEW CIVILIZATION BUILT BY KIDS</div>
+  <div style="font-size:0.8rem;letter-spacing:4px;color:#fff;margin-bottom:24px;">HOW OLD ARE YOU?</div>
+  <input id="age-input" type="number" min="1" max="99" placeholder="Enter your age" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15);border-radius:50px;padding:16px 28px;color:#fff;font-size:1rem;letter-spacing:4px;font-family:'Courier New',monospace;outline:none;text-align:center;width:220px;margin-bottom:16px;">
+  <button onclick="checkAge()" style="display:block;width:220px;padding:16px;background:linear-gradient(135deg,#ffcc00,#ff4444);border:none;color:#000;font-size:0.8rem;font-weight:900;letter-spacing:5px;cursor:pointer;border-radius:50px;font-family:'Courier New',monospace;">ENTER ⚡</button>
+  <div style="margin-top:24px;font-size:0.5rem;letter-spacing:3px;color:#222233;">KIDS ONLY · AGES 1–17</div>
+</div>
+
+<div id="age-blocked">
+  <div style="font-size:5rem;margin-bottom:20px;">🚫</div>
+  <div style="font-size:clamp(1.2rem,5vw,2.5rem);font-weight:900;letter-spacing:8px;color:#ff4444;margin-bottom:16px;">ADULTS NOT ALLOWED</div>
+  <div style="font-size:0.7rem;letter-spacing:4px;color:#553333;margin-bottom:8px;">KIDRISING IS FOR KIDS ONLY.</div>
+  <div style="font-size:0.6rem;letter-spacing:3px;color:#332222;">AGES 1–17 ONLY. COME BACK NEVER. 😄</div>
+</div>
+
 <canvas id="bg"></canvas>
 <nav>
   <div class="nav-logo">⚡ KIDRISING</div>
@@ -255,6 +274,22 @@ footer p{font-size:0.5rem;letter-spacing:3px;color:#222233;margin-top:8px;}
   <p style="margin-top:8px;">A NEW CIVILIZATION BUILT BY KIDS · FOR EVERY HUMAN ON EARTH · FREE FOREVER</p>
 </footer>
 <script>
+// Age gate
+const ageCleared=sessionStorage.getItem('kr_age_ok');
+if(ageCleared){document.getElementById('age-gate').style.display='none';}
+function checkAge(){
+  const age=parseInt(document.getElementById('age-input').value);
+  if(isNaN(age)||age<1){alert('Please enter your age!');return;}
+  if(age>=18){
+    document.getElementById('age-gate').style.display='none';
+    document.getElementById('age-blocked').style.display='flex';
+  } else {
+    sessionStorage.setItem('kr_age_ok','1');
+    document.getElementById('age-gate').style.display='none';
+  }
+}
+document.getElementById('age-input').addEventListener('keydown',e=>{if(e.key==='Enter')checkAge();});
+
 const canvas=document.getElementById('bg');
 const ctx=canvas.getContext('2d');
 function resizeBG(){canvas.width=window.innerWidth;canvas.height=window.innerHeight;}
