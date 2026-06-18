@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>KidRising — A New World Built By Kids</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{--gold:#ffcc00;--red:#ff4444;--blue:#4488ff;--purple:#cc44ff;--green:#44ffaa;--pink:#ff44aa;}
+body{background:#030308;color:#fff;font-family:'Courier New',monospace;overflow-x:hidden;}
+canvas{position:fixed;inset:0;z-index:0;pointer-events:none;}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:14px 32px;background:rgba(3,3,8,0.9);border-bottom:1px solid #ffffff08;backdrop-filter:blur(20px);}
+.nav-logo{font-size:1.1rem;font-weight:900;letter-spacing:6px;background:linear-gradient(90deg,var(--gold),var(--red),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.nav-links{display:flex;gap:12px;align-items:center;}
+.nav-btn{padding:8px 20px;border:none;border-radius:50px;font-size:0.55rem;font-weight:900;letter-spacing:3px;cursor:pointer;font-family:'Courier New',monospace;transition:all 0.2s;text-decoration:none;display:inline-block;}
+.nav-btn.outline{background:transparent;border:1px solid rgba(255,255,255,0.12);color:#aaa;}
+.nav-btn.outline:hover{border-color:var(--gold);color:var(--gold);}
+.nav-btn.fill{background:linear-gradient(135deg,var(--gold),var(--red));color:#000;font-weight:900;}
+.nav-btn.fill:hover{transform:scale(1.05);}
+#hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:100px 20px 60px;position:relative;z-index:1;}
+.hero-tag{display:inline-block;font-size:0.5rem;letter-spacing:6px;color:var(--gold);border:1px solid rgba(255,204,0,0.25);padding:7px 20px;border-radius:50px;margin-bottom:28px;}
+.hero-title{font-size:clamp(4rem,18vw,14rem);font-weight:900;letter-spacing:6px;line-height:0.85;margin-bottom:24px;}
+.hero-title .kid{background:linear-gradient(135deg,#fff,#ffeeaa,var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;display:block;}
+.hero-title .rising{background:linear-gradient(135deg,var(--red),var(--purple),var(--blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;display:block;}
+.hero-sub{font-size:clamp(0.7rem,2.5vw,1.2rem);letter-spacing:5px;color:#8888aa;margin-bottom:16px;max-width:600px;line-height:1.8;}
+.hero-mission{font-size:clamp(0.55rem,1.8vw,0.85rem);letter-spacing:4px;color:var(--gold);padding:12px 28px;border:1px solid rgba(255,204,0,0.2);border-radius:50px;display:inline-block;margin-bottom:52px;}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;}
+.btn-huge{padding:18px 56px;border:none;border-radius:50px;font-size:0.9rem;font-weight:900;letter-spacing:6px;cursor:pointer;font-family:'Courier New',monospace;transition:all 0.25s;text-decoration:none;display:inline-block;}
+.btn-huge.gold{background:linear-gradient(135deg,var(--gold),#ffaa00);color:#000;box-shadow:0 0 50px rgba(255,204,0,0.3);}
+.btn-huge.gold:hover{transform:scale(1.07);}
+.btn-huge.ghost{background:transparent;border:2px solid rgba(255,255,255,0.12);color:#fff;}
+.btn-huge.ghost:hover{border-color:var(--purple);color:var(--purple);}
+#counter-strip{padding:48px 20px;border-top:1px solid #ffffff06;border-bottom:1px solid #ffffff06;position:relative;z-index:1;}
+.counter-inner{display:flex;max-width:900px;margin:0 auto;flex-wrap:wrap;}
+.counter-item{flex:1;min-width:140px;text-align:center;padding:20px;border-right:1px solid #ffffff06;}
+.counter-item:last-child{border-right:none;}
+.counter-num{font-size:clamp(2rem,6vw,4rem);font-weight:900;background:linear-gradient(135deg,var(--gold),var(--red));-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1;}
+.counter-label{font-size:0.45rem;letter-spacing:5px;color:#333355;margin-top:8px;}
+#mission{padding:100px 20px;position:relative;z-index:1;text-align:center;}
+.mission-title{font-size:clamp(1.2rem,5vw,3rem);font-weight:900;letter-spacing:8px;margin-bottom:48px;}
+.mission-title span{background:linear-gradient(135deg,var(--gold),var(--red));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.pillars{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;max-width:1000px;margin:0 auto;}
+.pillar{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:20px;padding:32px 24px;transition:all 0.3s;text-align:left;}
+.pillar:hover{transform:translateY(-6px);border-color:var(--gold);}
+.pillar-icon{font-size:2.5rem;margin-bottom:16px;}
+.pillar-name{font-size:0.8rem;font-weight:900;letter-spacing:5px;color:#fff;margin-bottom:8px;}
+.pillar-desc{font-size:0.55rem;letter-spacing:2px;color:#555577;line-height:2;}
+#universe{padding:100px 20px;position:relative;z-index:1;border-top:1px solid #ffffff06;}
+.universe-title{text-align:center;font-size:clamp(1.2rem,5vw,2.5rem);font-weight:900;letter-spacing:8px;margin-bottom:8px;}
+.universe-sub{text-align:center;font-size:0.55rem;letter-spacing:5px;color:#333355;margin-bottom:60px;}
+.universe-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;max-width:1100px;margin:0 auto;}
+.universe-card{border-radius:20px;padding:32px;cursor:pointer;transition:all 0.3s;text-decoration:none;display:block;}
+.universe-card:hover{transform:translateY(-6px);}
+.uc-tag{font-size:0.45rem;letter-spacing:4px;margin-bottom:12px;display:inline-block;padding:4px 12px;border-radius:50px;}
+.uc-emoji{font-size:3rem;margin-bottom:16px;display:block;}
+.uc-name{font-size:1rem;font-weight:900;letter-spacing:5px;color:#fff;margin-bottom:8px;}
+.uc-desc{font-size:0.55rem;letter-spacing:2px;line-height:2;margin-bottom:20px;}
+.uc-btn{display:inline-block;padding:8px 24px;border-radius:50px;font-size:0.55rem;font-weight:900;letter-spacing:3px;}
+#founder{padding:100px 20px;position:relative;z-index:1;text-align:center;border-top:1px solid #ffffff06;}
+.founder-card{max-width:560px;margin:0 auto;background:rgba(255,204,0,0.03);border:1px solid rgba(255,204,0,0.12);border-radius:24px;padding:48px 32px;}
+.founder-emoji{font-size:5rem;margin-bottom:20px;}
+.founder-name{font-size:1.5rem;font-weight:900;letter-spacing:8px;color:var(--gold);margin-bottom:8px;}
+.founder-title{font-size:0.6rem;letter-spacing:5px;color:#555544;margin-bottom:24px;}
+.founder-quote{font-size:0.75rem;letter-spacing:3px;color:#aaaacc;line-height:2.4;border-left:3px solid var(--gold);padding-left:20px;text-align:left;}
+#join{padding:100px 20px;position:relative;z-index:1;text-align:center;}
+.join-title{font-size:clamp(2rem,8vw,5rem);font-weight:900;letter-spacing:8px;margin-bottom:16px;background:linear-gradient(135deg,#fff,var(--gold),var(--red));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.join-sub{font-size:0.65rem;letter-spacing:5px;color:#444466;margin-bottom:48px;}
+.join-form{display:flex;gap:10px;max-width:500px;margin:0 auto;flex-wrap:wrap;justify-content:center;}
+.join-input{flex:1;min-width:220px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:50px;padding:16px 24px;color:#fff;font-size:0.7rem;letter-spacing:2px;font-family:'Courier New',monospace;outline:none;}
+.join-input:focus{border-color:var(--gold);}
+.join-btn{padding:16px 36px;background:linear-gradient(135deg,var(--gold),var(--red));border:none;color:#000;font-size:0.7rem;font-weight:900;letter-spacing:4px;cursor:pointer;border-radius:50px;font-family:'Courier New',monospace;transition:all 0.2s;}
+.join-btn:hover{transform:scale(1.05);}
+.join-confirm{display:none;margin-top:24px;font-size:0.65rem;letter-spacing:4px;color:var(--gold);}
+footer{padding:48px 20px;text-align:center;border-top:1px solid #ffffff06;position:relative;z-index:1;}
+.footer-logo{font-size:1.5rem;font-weight:900;letter-spacing:8px;background:linear-gradient(90deg,var(--gold),var(--red),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:12px;}
+footer p{font-size:0.5rem;letter-spacing:3px;color:#222233;margin-top:8px;}
+.rise-particle{position:fixed;pointer-events:none;border-radius:50%;animation:riseUp linear infinite;}
+@keyframes riseUp{0%{transform:translateY(100vh) scale(0);opacity:0;}15%{opacity:0.8;}85%{opacity:0.6;}100%{transform:translateY(-60px) scale(1);opacity:0;}}
+</style>
+</head>
+<body>
+<canvas id="bg"></canvas>
+<nav>
+  <div class="nav-logo">⚡ KIDRISING</div>
+  <div class="nav-links">
+    <a class="nav-btn outline" href="#universe">EXPLORE</a>
+    <a class="nav-btn outline" href="#mission">MISSION</a>
+    <a class="nav-btn fill" href="#join">JOIN THE RISING</a>
+  </div>
+</nav>
+<section id="hero">
+  <div class="hero-tag">⚡ THE BIGGEST THING KIDS HAVE EVER BUILT</div>
+  <h1 class="hero-title"><span class="kid">KID</span><span class="rising">RISING</span></h1>
+  <p class="hero-sub">A NEW CIVILIZATION. BUILT BY KIDS. FOR EVERY HUMAN ON EARTH.</p>
+  <div class="hero-mission">MISSION: CHANGE EVERYTHING. START NOW. NEVER STOP.</div>
+  <div class="hero-btns">
+    <a class="btn-huge gold" href="#join">⚡ JOIN THE RISING</a>
+    <a class="btn-huge ghost" href="#universe">EXPLORE THE UNIVERSE</a>
+  </div>
+</section>
+<section id="counter-strip">
+  <div class="counter-inner">
+    <div class="counter-item"><div class="counter-num" id="c-kids">1</div><div class="counter-label">KIDS RISING</div></div>
+    <div class="counter-item"><div class="counter-num">6</div><div class="counter-label">PROJECTS BUILT</div></div>
+    <div class="counter-item"><div class="counter-num">10</div><div class="counter-label">FOUNDER AGE</div></div>
+    <div class="counter-item"><div class="counter-num">∞</div><div class="counter-label">POTENTIAL</div></div>
+  </div>
+</section>
+<section id="mission">
+  <div class="mission-title">THE <span>5 PILLARS</span> OF KIDRISING</div>
+  <div class="pillars">
+    <div class="pillar"><div class="pillar-icon">💛</div><div class="pillar-name">KINDNESS</div><div class="pillar-desc">Be kind to everyone. Especially disabled kids. No exceptions. Ever.</div></div>
+    <div class="pillar"><div class="pillar-icon">🗳️</div><div class="pillar-name">VOICE</div><div class="pillar-desc">Every kid has a voice that matters. Post ideas. Vote. Be heard. Kids change the world too.</div></div>
+    <div class="pillar"><div class="pillar-icon">♿</div><div class="pillar-name">EQUALITY</div><div class="pillar-desc">1.3 billion disabled people are superheroes. In KidRising, everyone is equal.</div></div>
+    <div class="pillar"><div class="pillar-icon">🎮</div><div class="pillar-name">CREATIVITY</div><div class="pillar-desc">Build games. Make movies. Write stories. Create anything. KidRising is where imagination becomes real.</div></div>
+    <div class="pillar"><div class="pillar-icon">🌍</div><div class="pillar-name">REVOLUTION</div><div class="pillar-desc">Not just a website. A new way of living. Kids leading. Kids creating. Kids rising.</div></div>
+  </div>
+</section>
+<section id="universe">
+  <div class="universe-title">⚡ THE KIDRISING UNIVERSE</div>
+  <div class="universe-sub">EVERY PROJECT. ONE WORLD.</div>
+  <div class="universe-grid">
+    <a href="https://oliveryvo-cmd.github.io/ovocares" target="_blank" class="universe-card" style="background:linear-gradient(135deg,#001040,#000820);border:1px solid #4488ff22;">
+      <span class="uc-tag" style="background:rgba(68,136,255,0.15);color:#4488ff;">DISABILITY SUPPORT</span>
+      <span class="uc-emoji">💙</span>
+      <div class="uc-name">OVO CARES</div>
+      <div class="uc-desc" style="color:#6688aa;">Helping 1.3 billion disabled people find resources. Emergency SOS, communication tools, and more.</div>
+      <span class="uc-btn" style="background:rgba(68,136,255,0.2);color:#4488ff;">OPEN APP →</span>
+    </a>
+    <a href="https://oliveryvo-cmd.github.io/kid-country" target="_blank" class="universe-card" style="background:linear-gradient(135deg,#201000,#100800);border:1px solid #ffcc0022;">
+      <span class="uc-tag" style="background:rgba(255,204,0,0.15);color:#ffcc00;">KID GOVERNMENT</span>
+      <span class="uc-emoji">🏴</span>
+      <div class="uc-name">ALLONEKIDS</div>
+      <div class="uc-desc" style="color:#aa9966;">The country run by kids. Post ideas. Vote. Change the world. No adults in charge.</div>
+      <span class="uc-btn" style="background:rgba(255,204,0,0.2);color:#ffcc00;">BECOME CITIZEN →</span>
+    </a>
+    <a href="https://oliveryvo-cmd.github.io/kindnessrules" target="_blank" class="universe-card" style="background:linear-gradient(135deg,#200020,#100010);border:1px solid #ff44aa22;">
+      <span class="uc-tag" style="background:rgba(255,68,170,0.15);color:#ff44aa;">KINDNESS MOVEMENT</span>
+      <span class="uc-emoji">💛</span>
+      <div class="uc-name">KINDONE</div>
+      <div class="uc-desc" style="color:#aa6688;">A worldwide promise to never be mean. To anyone. Especially disabled kids.</div>
+      <span class="uc-btn" style="background:rgba(255,68,170,0.2);color:#ff44aa;">JOIN KINDONE →</span>
+    </a>
+    <a href="https://youtu.be/pZ4G58A-J1E" target="_blank" class="universe-card" style="background:linear-gradient(135deg,#100020,#080010);border:1px solid #cc44ff22;">
+      <span class="uc-tag" style="background:rgba(204,68,255,0.15);color:#cc44ff;">MOVIE</span>
+      <span class="uc-emoji">🎬</span>
+      <div class="uc-name">STAND UP</div>
+      <div class="uc-desc" style="color:#9966aa;">1.3 billion disabled superheroes rise up. Written and directed by Oliver Vo, age 10.</div>
+      <span class="uc-btn" style="background:rgba(204,68,255,0.2);color:#cc44ff;">WATCH NOW →</span>
+    </a>
+    <a href="https://oliveryvo-cmd.github.io/upguns" target="_blank" class="universe-card" style="background:linear-gradient(135deg,#200000,#100000);border:1px solid #ff444422;">
+      <span class="uc-tag" style="background:rgba(255,68,68,0.15);color:#ff4444;">GAME</span>
+      <span class="uc-emoji">🔫</span>
+      <div class="uc-name">UPGUNS</div>
+      <div class="uc-desc" style="color:#aa6666;">Fast-paced 3D shooter with epic weapons, maps, and game modes. Built by a 10 year old.</div>
+      <span class="uc-btn" style="background:rgba(255,68,68,0.2);color:#ff4444;">PLAY NOW →</span>
+    </a>
+    <a href="https://oliveryvo-cmd.github.io/inspiringsupport-games" target="_blank" class="universe-card" style="background:linear-gradient(135deg,#002010,#001008);border:1px solid #44ffaa22;">
+      <span class="uc-tag" style="background:rgba(68,255,170,0.15);color:#44ffaa;">GAME STUDIO</span>
+      <span class="uc-emoji">🎮</span>
+      <div class="uc-name">KRG GAMES</div>
+      <div class="uc-desc" style="color:#66aa88;">Race KRG, Alive Fear, Galactic Clash, Dogfight Galaxy and more. All free. All made by kids.</div>
+      <span class="uc-btn" style="background:rgba(68,255,170,0.2);color:#44ffaa;">PLAY GAMES →</span>
+    </a>
+  </div>
+</section>
+<section id="founder">
+  <div class="founder-card">
+    <div class="founder-emoji">👦</div>
+    <div class="founder-name">OLIVER VO</div>
+    <div class="founder-title">FOUNDER OF KIDRISING · AGE 10 · LADERA RANCH, USA</div>
+    <div class="founder-quote">"I am 10 years old and I am building a new civilization for kids.<br><br>Not a website. Not a game. A whole new way of living — where every kid matters, every voice is heard, and kindness is the law.<br><br>This is just the beginning."</div>
+  </div>
+</section>
+<section id="join">
+  <div class="join-title">JOIN THE RISING</div>
+  <div class="join-sub">BE PART OF SOMETHING BIGGER THAN ANYTHING</div>
+  <div class="join-form">
+    <input class="join-input" id="j-name" type="text" placeholder="Your first name">
+    <input class="join-input" id="j-country" type="text" placeholder="Your country">
+    <button class="join-btn" onclick="joinRising()">⚡ RISE UP</button>
+  </div>
+  <div class="join-confirm" id="join-confirm"></div>
+</section>
+<footer>
+  <div class="footer-logo">KIDRISING</div>
+  <p>FOUNDED BY OLIVER VO · AGE 10 · LADERA RANCH, USA · KIDSREBELLION GAMES</p>
+  <p style="margin-top:8px;">A NEW CIVILIZATION BUILT BY KIDS · FOR EVERY HUMAN ON EARTH · FREE FOREVER</p>
+</footer>
+<script>
+const canvas=document.getElementById('bg');
+const ctx=canvas.getContext('2d');
+function resizeBG(){canvas.width=window.innerWidth;canvas.height=window.innerHeight;}
+resizeBG();window.addEventListener('resize',resizeBG);
+const stars=Array.from({length:300},()=>({x:Math.random(),y:Math.random(),r:Math.random()*1.8+0.2,t:Math.random()*Math.PI*2,speed:Math.random()*0.01+0.005}));
+const nebula=[{x:0.2,y:0.3,r:0.4,c:'255,204,0',a:0.03},{x:0.8,y:0.6,r:0.35,c:'204,68,255',a:0.03},{x:0.5,y:0.8,r:0.3,c:'255,68,68',a:0.02}];
+function drawBG(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  nebula.forEach(n=>{const g=ctx.createRadialGradient(n.x*canvas.width,n.y*canvas.height,0,n.x*canvas.width,n.y*canvas.height,n.r*canvas.width);g.addColorStop(0,`rgba(${n.c},${n.a})`);g.addColorStop(1,'rgba(0,0,0,0)');ctx.fillStyle=g;ctx.fillRect(0,0,canvas.width,canvas.height);});
+  stars.forEach(s=>{s.t+=s.speed;ctx.beginPath();ctx.arc(s.x*canvas.width,s.y*canvas.height,s.r,0,Math.PI*2);ctx.fillStyle=`rgba(255,255,255,${0.2+0.5*Math.abs(Math.sin(s.t))})`;ctx.fill();});
+  requestAnimationFrame(drawBG);
+}
+drawBG();
+let members=JSON.parse(localStorage.getItem('kr_rising')||'[]');
+document.getElementById('c-kids').textContent=members.length||1;
+function joinRising(){
+  const name=document.getElementById('j-name').value.trim();
+  const country=document.getElementById('j-country').value.trim();
+  if(!name||!country){alert('Please enter your name and country!');return;}
+  members.push({name,country});
+  localStorage.setItem('kr_rising',JSON.stringify(members));
+  document.getElementById('c-kids').textContent=members.length;
+  const c=document.getElementById('join-confirm');
+  c.style.display='block';
+  c.innerHTML=`⚡ WELCOME TO KIDRISING, ${name.toUpperCase()}!<br><span style="font-size:0.5rem;letter-spacing:3px;color:#555544;">RISER #${members.length} · THE REVOLUTION HAS BEGUN</span>`;
+  document.getElementById('j-name').value='';document.getElementById('j-country').value='';
+  for(let i=0;i<12;i++) spawnParticle();
+}
+function spawnParticle(){
+  const p=document.createElement('div');p.className='rise-particle';
+  const colors=['#ffcc00','#ff4444','#cc44ff','#4488ff','#44ffaa','#ff44aa'];
+  const size=Math.random()*5+2;
+  p.style.cssText=`width:${size}px;height:${size}px;background:${colors[Math.floor(Math.random()*colors.length)]};left:${Math.random()*100}vw;bottom:0;animation-duration:${Math.random()*6+5}s;`;
+  document.body.appendChild(p);setTimeout(()=>p.remove(),(Math.random()*6+5)*1000);
+}
+setInterval(spawnParticle,600);
+</script>
+</body>
+</html>
