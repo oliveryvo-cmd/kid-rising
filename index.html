@@ -105,6 +105,7 @@ footer p{font-size:0.5rem;letter-spacing:3px;color:#222233;margin-top:8px;}
     <a class="nav-btn outline" href="#universe">EXPLORE</a>
     <a class="nav-btn outline" href="#mission">MISSION</a>
     <a class="nav-btn fill" href="#join">JOIN THE RISING</a>
+    <button class="nav-btn outline" onclick="openAdmin()" style="color:#ff4444;border-color:#ff444422;">🛡️ ADMIN</button>
   </div>
 </nav>
 <section id="hero">
@@ -258,6 +259,20 @@ footer p{font-size:0.5rem;letter-spacing:3px;color:#222233;margin-top:8px;}
   </div>
 </section>
 
+<!-- ADMIN PANEL -->
+<section id="admin-panel" style="display:none;padding:80px 20px;border-top:1px solid #ff444422;position:relative;z-index:1;">
+  <div style="max-width:700px;margin:0 auto;">
+    <div style="text-align:center;font-size:clamp(1rem,4vw,2rem);font-weight:900;letter-spacing:8px;color:#ff4444;margin-bottom:8px;">🛡️ ADMIN PANEL</div>
+    <div style="text-align:center;font-size:0.55rem;letter-spacing:4px;color:#441111;margin-bottom:40px;">OLIVER VO · FOUNDER · KIDRISING</div>
+    <div style="font-size:0.65rem;letter-spacing:4px;color:#ff4444;margin-bottom:16px;">📰 ALL NEWS STORIES</div>
+    <div id="admin-news-list"></div>
+    <div style="font-size:0.65rem;letter-spacing:4px;color:#ff4444;margin-top:32px;margin-bottom:16px;">💰 ALL COIN CLAIMS</div>
+    <div id="admin-coin-list"></div>
+    <div style="font-size:0.65rem;letter-spacing:4px;color:#ff4444;margin-top:32px;margin-bottom:16px;">⚡ ALL MEMBERS</div>
+    <div id="admin-member-list"></div>
+  </div>
+</section>
+
 <section id="join">
   <div class="join-title">JOIN THE RISING</div>
   <div class="join-sub">BE PART OF SOMETHING BIGGER THAN ANYTHING</div>
@@ -274,6 +289,36 @@ footer p{font-size:0.5rem;letter-spacing:3px;color:#222233;margin-top:8px;}
   <p style="margin-top:8px;">A NEW CIVILIZATION BUILT BY KIDS · FOR EVERY HUMAN ON EARTH · FREE FOREVER</p>
 </footer>
 <script>
+// Security
+const ADMIN_PASS='Oliver Is Good';
+const BAD_WORDS=['hate','stupid','idiot','shut up','dumb','ugly','loser','kill','die','sex','porn','damn','hell','crap','ass','shit','fuck','bitch'];
+function hasBadWord(text){return BAD_WORDS.some(w=>text.toLowerCase().includes(w));}
+function hasLink(text){return /https?:\/\/|www\.|\.com|\.net|\.org/i.test(text);}
+function sanitize(text){if(hasBadWord(text)){alert('🚫 That contains a bad word! Please keep it kind.');return null;}if(hasLink(text)){alert('🚫 No links allowed for safety!');return null;}return text;}
+
+function openAdmin(){
+  const pass=prompt('Enter admin password:');
+  if(pass===ADMIN_PASS){
+    document.getElementById('admin-panel').style.display='block';
+    document.getElementById('admin-panel').scrollIntoView({behavior:'smooth'});
+    renderAdminPanel();
+  } else {
+    alert('Wrong password!');
+  }
+}
+function renderAdminPanel(){
+  const nl=document.getElementById('admin-news-list');
+  nl.innerHTML=news.length?news.map((n,i)=>`<div style="background:rgba(255,68,68,0.04);border:1px solid rgba(255,68,68,0.1);border-radius:12px;padding:16px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;"><div><div style="font-size:0.65rem;color:#fff;">${n.headline}</div><div style="font-size:0.5rem;color:#553333;">by ${n.name} · ${n.date}</div></div><button onclick="deleteNews(${i})" style="background:#ff4444;border:none;color:#fff;padding:6px 16px;border-radius:50px;cursor:pointer;font-size:0.5rem;letter-spacing:2px;font-family:'Courier New',monospace;">DELETE</button></div>`).join(''):'<div style="font-size:0.55rem;color:#332222;text-align:center;">No stories yet.</div>';
+  const cl=document.getElementById('admin-coin-list');
+  cl.innerHTML=coins.length?coins.map((c,i)=>`<div style="background:rgba(255,68,68,0.04);border:1px solid rgba(255,68,68,0.1);border-radius:12px;padding:16px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;"><div><div style="font-size:0.65rem;color:#fff;">${c.name} · +${c.amount} coins</div><div style="font-size:0.5rem;color:#553333;">${c.desc} · ${c.date}</div></div><button onclick="deleteCoin(${i})" style="background:#ff4444;border:none;color:#fff;padding:6px 16px;border-radius:50px;cursor:pointer;font-size:0.5rem;letter-spacing:2px;font-family:'Courier New',monospace;">DELETE</button></div>`).join(''):'<div style="font-size:0.55rem;color:#332222;text-align:center;">No claims yet.</div>';
+  const ml=document.getElementById('admin-member-list');
+  ml.innerHTML=members.length?members.map((m,i)=>`<div style="background:rgba(255,68,68,0.04);border:1px solid rgba(255,68,68,0.1);border-radius:12px;padding:16px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;"><div style="font-size:0.65rem;color:#fff;">${m.name} · ${m.country}</div><button onclick="deleteMember(${i})" style="background:#ff4444;border:none;color:#fff;padding:6px 16px;border-radius:50px;cursor:pointer;font-size:0.5rem;letter-spacing:2px;font-family:'Courier New',monospace;">REMOVE</button></div>`).join(''):'<div style="font-size:0.55rem;color:#332222;text-align:center;">No members yet.</div>';
+}
+function reportStory(i){if(confirm('Report this story as bad or mean?')){news[i].reported=true;localStorage.setItem('kr_news',JSON.stringify(news));alert('🚩 Reported! The admin will review it.');renderNews();}}
+function deleteNews(i){news.splice(i,1);localStorage.setItem('kr_news',JSON.stringify(news));renderNews();renderAdminPanel();}
+function deleteCoin(i){coins.splice(i,1);localStorage.setItem('kr_coins',JSON.stringify(coins));renderCoinBoard();renderAdminPanel();}
+function deleteMember(i){members.splice(i,1);localStorage.setItem('kr_rising',JSON.stringify(members));renderAdminPanel();}
+
 // Age gate
 const ageCleared=sessionStorage.getItem('kr_age_ok');
 if(ageCleared){document.getElementById('age-gate').style.display='none';}
@@ -338,10 +383,11 @@ function renderCoinBoard(){
   board.innerHTML=sorted.map(([name,amt],i)=>`<div style="display:flex;align-items:center;justify-content:space-between;padding:12px 20px;margin-bottom:8px;background:rgba(255,204,0,0.04);border:1px solid rgba(255,204,0,0.08);border-radius:12px;"><span style="font-size:0.6rem;letter-spacing:3px;color:#ffcc00;">${['🥇','🥈','🥉'][i]||'⭐'} ${name.toUpperCase()}</span><span style="font-size:0.8rem;font-weight:900;color:#ffcc00;">${amt} COINS</span></div>`).join('');
 }
 function claimCoins(){
-  const name=document.getElementById('coin-name').value.trim();
+  const name=sanitize(document.getElementById('coin-name').value.trim());
   const amount=parseInt(document.getElementById('coin-act').value);
-  const desc=document.getElementById('coin-desc').value.trim();
-  if(!name||!desc){alert('Fill in your name and what you did!');return;}
+  const desc=sanitize(document.getElementById('coin-desc').value.trim());
+  if(!name||!desc)return;
+  if(name===''||desc===''){alert('Fill in your name and what you did!');return;}
   coins.push({name,amount,desc,date:new Date().toLocaleDateString()});
   localStorage.setItem('kr_coins',JSON.stringify(coins));
   renderCoinBoard();
@@ -359,13 +405,14 @@ let news=JSON.parse(localStorage.getItem('kr_news')||'[]');
 function renderNews(){
   const feed=document.getElementById('news-feed');
   if(!news.length){feed.innerHTML='<div style="text-align:center;font-size:0.55rem;letter-spacing:3px;color:#222233;">No stories yet. Be the first reporter!</div>';return;}
-  feed.innerHTML=[...news].reverse().map(n=>`<div style="background:rgba(68,136,255,0.03);border:1px solid rgba(68,136,255,0.1);border-radius:16px;padding:24px;margin-bottom:16px;"><div style="font-size:0.5rem;letter-spacing:4px;color:#4488ff88;margin-bottom:8px;">📡 ${n.date} · BY ${n.name.toUpperCase()}</div><div style="font-size:0.9rem;font-weight:900;letter-spacing:3px;color:#fff;margin-bottom:12px;">${n.headline}</div><div style="font-size:0.6rem;letter-spacing:2px;color:#6677aa;line-height:2;">${n.story}</div></div>`).join('');
+  feed.innerHTML=[...news].reverse().map((n,i)=>`<div style="background:rgba(68,136,255,0.03);border:1px solid rgba(68,136,255,0.1);border-radius:16px;padding:24px;margin-bottom:16px;"><div style="display:flex;justify-content:space-between;align-items:flex-start;"><div style="font-size:0.5rem;letter-spacing:4px;color:#4488ff88;margin-bottom:8px;">📡 ${n.date} · BY ${n.name.toUpperCase()}</div><button onclick="reportStory(${news.length-1-i})" style="background:rgba(255,68,68,0.1);border:1px solid #ff444422;color:#ff4444;padding:4px 12px;border-radius:50px;cursor:pointer;font-size:0.45rem;letter-spacing:2px;font-family:'Courier New',monospace;">🚩 REPORT</button></div><div style="font-size:0.9rem;font-weight:900;letter-spacing:3px;color:#fff;margin-bottom:12px;">${n.headline}</div><div style="font-size:0.6rem;letter-spacing:2px;color:#6677aa;line-height:2;">${n.story}</div></div>`).join('');
 }
 function submitNews(){
-  const name=document.getElementById('news-name').value.trim();
-  const headline=document.getElementById('news-headline').value.trim();
-  const story=document.getElementById('news-story').value.trim();
-  if(!name||!headline||!story){alert('Fill in everything!');return;}
+  const name=sanitize(document.getElementById('news-name').value.trim());
+  const headline=sanitize(document.getElementById('news-headline').value.trim());
+  const story=sanitize(document.getElementById('news-story').value.trim());
+  if(!name||!headline||!story)return;
+  if(name===''||headline===''||story===''){alert('Fill in everything!');return;}
   news.push({name,headline,story,date:new Date().toLocaleDateString()});
   localStorage.setItem('kr_news',JSON.stringify(news));
   renderNews();
