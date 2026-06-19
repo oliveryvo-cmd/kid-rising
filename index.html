@@ -259,6 +259,24 @@ footer p{font-size:0.5rem;letter-spacing:3px;color:#222233;margin-top:8px;}
   </div>
 </section>
 
+<!-- KID CHAT -->
+<section id="kidchat" style="padding:100px 20px;border-top:1px solid #44ffaa22;position:relative;z-index:1;">
+  <div style="text-align:center;margin-bottom:48px;">
+    <div style="font-size:clamp(1.2rem,5vw,2.5rem);font-weight:900;letter-spacing:8px;margin-bottom:8px;background:linear-gradient(135deg,#44ffaa,#4488ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">💬 KID CHAT</div>
+    <div style="font-size:0.55rem;letter-spacing:5px;color:#333355;">TALK TO KIDS FROM ALL OVER THE WORLD</div>
+  </div>
+  <div style="max-width:680px;margin:0 auto;">
+    <div id="chat-messages" style="background:rgba(68,255,170,0.02);border:1px solid rgba(68,255,170,0.08);border-radius:20px;padding:20px;height:360px;overflow-y:auto;margin-bottom:16px;display:flex;flex-direction:column;gap:10px;">
+      <div style="text-align:center;font-size:0.55rem;letter-spacing:3px;color:#222233;">Be kind. No bad words. No links. Have fun! ⚡</div>
+    </div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;">
+      <input id="chat-name" type="text" placeholder="Your name" style="width:140px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:50px;padding:12px 18px;color:#fff;font-size:0.6rem;letter-spacing:2px;font-family:'Courier New',monospace;outline:none;">
+      <input id="chat-msg" type="text" placeholder="Say something..." style="flex:1;min-width:160px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:50px;padding:12px 18px;color:#fff;font-size:0.6rem;letter-spacing:2px;font-family:'Courier New',monospace;outline:none;">
+      <button onclick="sendChat()" style="padding:12px 28px;background:linear-gradient(135deg,#44ffaa,#4488ff);border:none;color:#000;font-size:0.65rem;font-weight:900;letter-spacing:3px;cursor:pointer;border-radius:50px;font-family:'Courier New',monospace;">SEND ⚡</button>
+    </div>
+  </div>
+</section>
+
 <!-- ADMIN PANEL -->
 <section id="admin-panel" style="display:none;padding:80px 20px;border-top:1px solid #ff444422;position:relative;z-index:1;">
   <div style="max-width:700px;margin:0 auto;">
@@ -424,6 +442,32 @@ function submitNews(){
   document.getElementById('news-story').value='';
 }
 renderNews();
+
+// KID CHAT
+let chats=JSON.parse(localStorage.getItem('kr_chat')||'[]');
+const colors=['#44ffaa','#4488ff','#ffcc00','#ff44aa','#cc44ff','#ff4444'];
+function nameColor(name){let h=0;for(let c of name)h+=c.charCodeAt(0);return colors[h%colors.length];}
+function renderChat(){
+  const box=document.getElementById('chat-messages');
+  const msgs=chats.slice(-50);
+  box.innerHTML='<div style="text-align:center;font-size:0.55rem;letter-spacing:3px;color:#222233;">Be kind. No bad words. No links. Have fun! ⚡</div>'+msgs.map(m=>`<div style="display:flex;gap:10px;align-items:flex-start;"><span style="font-size:0.6rem;font-weight:900;color:${nameColor(m.name)};white-space:nowrap;letter-spacing:2px;">${m.name.toUpperCase()}</span><span style="font-size:0.6rem;color:#8888aa;letter-spacing:1px;line-height:1.8;">${m.text}</span></div>`).join('');
+  box.scrollTop=box.scrollHeight;
+}
+function sendChat(){
+  const name=document.getElementById('chat-name').value.trim();
+  const text=sanitize(document.getElementById('chat-msg').value.trim());
+  if(!name||!text)return;
+  if(name.length>20){alert('Name too long!');return;}
+  if(text.length>200){alert('Message too long!');return;}
+  chats.push({name,text,time:Date.now()});
+  if(chats.length>200)chats=chats.slice(-200);
+  localStorage.setItem('kr_chat',JSON.stringify(chats));
+  renderChat();
+  document.getElementById('chat-msg').value='';
+}
+document.getElementById('chat-msg').addEventListener('keydown',e=>{if(e.key==='Enter')sendChat();});
+renderChat();
+setInterval(()=>{const saved=JSON.parse(localStorage.getItem('kr_chat')||'[]');if(saved.length!==chats.length){chats=saved;renderChat();}},3000);
 </script>
 </body>
 </html>
