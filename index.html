@@ -259,6 +259,60 @@ footer p{font-size:0.5rem;letter-spacing:3px;color:#222233;margin-top:8px;}
   </div>
 </section>
 
+<!-- KID WAR -->
+<section id="kidwar" style="padding:100px 20px;border-top:1px solid #ff440022;position:relative;z-index:1;">
+  <div style="text-align:center;margin-bottom:48px;">
+    <div style="font-size:clamp(1.2rem,5vw,2.5rem);font-weight:900;letter-spacing:8px;margin-bottom:8px;background:linear-gradient(135deg,#ff4400,#ffcc00,#ff4444);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">⚔️ KID WAR</div>
+    <div style="font-size:0.55rem;letter-spacing:5px;color:#333355;">PICK YOUR FACTION. INVADE. CONQUER THE WORLD.</div>
+  </div>
+
+  <!-- Faction Picker -->
+  <div id="war-pick" style="max-width:800px;margin:0 auto;">
+    <div style="text-align:center;font-size:0.65rem;letter-spacing:4px;color:#888866;margin-bottom:28px;">CHOOSE YOUR FACTION</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px;margin-bottom:32px;">
+      <div onclick="joinFaction('FIRE','#ff4400','🔥')" style="background:rgba(255,68,0,0.06);border:1px solid rgba(255,68,0,0.2);border-radius:16px;padding:24px;text-align:center;cursor:pointer;transition:all 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+        <div style="font-size:3rem;margin-bottom:8px;">🔥</div>
+        <div style="font-size:0.7rem;font-weight:900;letter-spacing:4px;color:#ff4400;">FIRE</div>
+      </div>
+      <div onclick="joinFaction('STORM','#4488ff','⚡')" style="background:rgba(68,136,255,0.06);border:1px solid rgba(68,136,255,0.2);border-radius:16px;padding:24px;text-align:center;cursor:pointer;transition:all 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+        <div style="font-size:3rem;margin-bottom:8px;">⚡</div>
+        <div style="font-size:0.7rem;font-weight:900;letter-spacing:4px;color:#4488ff;">STORM</div>
+      </div>
+      <div onclick="joinFaction('EARTH','#44ffaa','🌍')" style="background:rgba(68,255,170,0.06);border:1px solid rgba(68,255,170,0.2);border-radius:16px;padding:24px;text-align:center;cursor:pointer;transition:all 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+        <div style="font-size:3rem;margin-bottom:8px;">🌍</div>
+        <div style="font-size:0.7rem;font-weight:900;letter-spacing:4px;color:#44ffaa;">EARTH</div>
+      </div>
+      <div onclick="joinFaction('SHADOW','#cc44ff','🌑')" style="background:rgba(204,68,255,0.06);border:1px solid rgba(204,68,255,0.2);border-radius:16px;padding:24px;text-align:center;cursor:pointer;transition:all 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+        <div style="font-size:3rem;margin-bottom:8px;">🌑</div>
+        <div style="font-size:0.7rem;font-weight:900;letter-spacing:4px;color:#cc44ff;">SHADOW</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- War Board -->
+  <div id="war-board" style="display:none;max-width:800px;margin:0 auto;">
+    <div id="war-status" style="text-align:center;margin-bottom:32px;"></div>
+    <!-- Territory Map -->
+    <div style="text-align:center;font-size:0.55rem;letter-spacing:4px;color:#333355;margin-bottom:16px;">🗺️ TERRITORY MAP</div>
+    <div id="war-map" style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:32px;"></div>
+    <!-- Attack -->
+    <div style="background:rgba(255,68,0,0.03);border:1px solid rgba(255,68,0,0.1);border-radius:20px;padding:28px;margin-bottom:20px;">
+      <div style="font-size:0.65rem;letter-spacing:4px;color:#ff4400;margin-bottom:16px;">⚔️ LAUNCH ATTACK (COSTS 20 COINS)</div>
+      <select id="war-target" style="width:100%;background:#0a0a14;border:1px solid rgba(255,255,255,0.1);border-radius:50px;padding:14px 20px;color:#fff;font-size:0.65rem;letter-spacing:2px;font-family:'Courier New',monospace;outline:none;margin-bottom:12px;">
+        <option value="FIRE">🔥 Attack FIRE</option>
+        <option value="STORM">⚡ Attack STORM</option>
+        <option value="EARTH">🌍 Attack EARTH</option>
+        <option value="SHADOW">🌑 Attack SHADOW</option>
+      </select>
+      <button onclick="launchAttack()" style="width:100%;padding:14px;background:linear-gradient(135deg,#ff4400,#ff4444);border:none;color:#fff;font-size:0.75rem;font-weight:900;letter-spacing:5px;cursor:pointer;border-radius:50px;font-family:'Courier New',monospace;">⚔️ ATTACK!</button>
+    </div>
+    <!-- War Log -->
+    <div style="font-size:0.55rem;letter-spacing:4px;color:#333355;margin-bottom:12px;">📜 WAR LOG</div>
+    <div id="war-log" style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.05);border-radius:16px;padding:16px;max-height:200px;overflow-y:auto;"></div>
+    <button onclick="leaveFaction()" style="margin-top:20px;background:transparent;border:1px solid #333355;color:#555577;padding:10px 24px;border-radius:50px;cursor:pointer;font-size:0.55rem;letter-spacing:3px;font-family:'Courier New',monospace;">Leave Faction</button>
+  </div>
+</section>
+
 <!-- KID EMERGENCY BUTTON -->
 <section id="sos" style="padding:100px 20px;border-top:1px solid #ff444433;position:relative;z-index:1;text-align:center;">
   <div style="font-size:clamp(1.2rem,5vw,2.5rem);font-weight:900;letter-spacing:8px;margin-bottom:8px;color:#ff4444;">🆘 KID EMERGENCY BUTTON</div>
@@ -468,6 +522,70 @@ function submitNews(){
   document.getElementById('news-story').value='';
 }
 renderNews();
+
+// KID WAR
+const FACTIONS={FIRE:{emoji:'🔥',color:'#ff4400'},STORM:{emoji:'⚡',color:'#4488ff'},EARTH:{emoji:'🌍',color:'#44ffaa'},SHADOW:{emoji:'🌑',color:'#cc44ff'}};
+let warData=JSON.parse(localStorage.getItem('kr_war')||'{"territories":{"FIRE":6,"STORM":6,"EARTH":6,"SHADOW":7},"log":[],"coins":{"FIRE":0,"STORM":0,"EARTH":0,"SHADOW":0}}');
+let myFaction=localStorage.getItem('kr_my_faction')||null;
+let myWarName=localStorage.getItem('kr_war_name')||null;
+
+function joinFaction(name,color,emoji){
+  const n=prompt(`Welcome to ${emoji} ${name}! Enter your warrior name:`);
+  if(!n||!n.trim())return;
+  const cleaned=sanitize(n.trim());
+  if(!cleaned)return;
+  myFaction=name;myWarName=cleaned;
+  localStorage.setItem('kr_my_faction',name);
+  localStorage.setItem('kr_war_name',cleaned);
+  document.getElementById('war-pick').style.display='none';
+  document.getElementById('war-board').style.display='block';
+  renderWar();
+}
+function leaveFaction(){
+  myFaction=null;myWarName=null;
+  localStorage.removeItem('kr_my_faction');localStorage.removeItem('kr_war_name');
+  document.getElementById('war-pick').style.display='block';
+  document.getElementById('war-board').style.display='none';
+}
+function renderWar(){
+  if(!myFaction)return;
+  const f=FACTIONS[myFaction];
+  document.getElementById('war-status').innerHTML=`<span style="font-size:0.7rem;font-weight:900;letter-spacing:4px;color:${f.color};">${f.emoji} ${myFaction} WARRIOR: ${myWarName.toUpperCase()}</span>`;
+  // Map
+  const map=document.getElementById('war-map');
+  const tiles=[];
+  Object.entries(warData.territories).forEach(([faction,count])=>{for(let i=0;i<count;i++)tiles.push(faction);});
+  tiles.sort(()=>Math.random()-0.5);
+  map.innerHTML=tiles.map(t=>`<div style="background:${FACTIONS[t].color}22;border:1px solid ${FACTIONS[t].color}44;border-radius:8px;padding:10px;text-align:center;font-size:1.2rem;">${FACTIONS[t].emoji}</div>`).join('');
+  // Scores
+  const scores=Object.entries(warData.territories).map(([f,c])=>`<span style="color:${FACTIONS[f].color};font-size:0.6rem;letter-spacing:3px;margin:0 12px;">${FACTIONS[f].emoji} ${f}: ${c}</span>`).join('');
+  document.getElementById('war-status').innerHTML+=`<div style="margin-top:12px;">${scores}</div>`;
+  // Log
+  const log=document.getElementById('war-log');
+  log.innerHTML=warData.log.slice(-20).reverse().map(l=>`<div style="font-size:0.55rem;letter-spacing:2px;color:#555566;padding:4px 0;border-bottom:1px solid #ffffff04;">${l}</div>`).join('')||'<div style="font-size:0.55rem;color:#222233;">No battles yet. Strike first!</div>';
+  // Remove own faction from attack options
+  const sel=document.getElementById('war-target');
+  Array.from(sel.options).forEach(o=>o.disabled=(o.value===myFaction));
+}
+function launchAttack(){
+  const target=document.getElementById('war-target').value;
+  if(target===myFaction){alert("You can't attack your own faction!");return;}
+  if(warData.territories[target]<=0){alert('That faction has no territory left!');return;}
+  const win=Math.random()>0.4;
+  if(win){
+    warData.territories[target]--;
+    warData.territories[myFaction]++;
+    warData.log.push(`⚔️ ${FACTIONS[myFaction].emoji} ${myWarName} CONQUERED a ${FACTIONS[target].emoji} ${target} territory!`);
+  } else {
+    warData.territories[myFaction]--;
+    warData.territories[target]++;
+    warData.log.push(`🛡️ ${FACTIONS[target].emoji} ${target} DEFENDED against ${FACTIONS[myFaction].emoji} ${myWarName}!`);
+  }
+  localStorage.setItem('kr_war',JSON.stringify(warData));
+  renderWar();
+  alert(win?`⚔️ VICTORY! You conquered ${FACTIONS[target].emoji} ${target} territory!`:`🛡️ DEFEATED! ${FACTIONS[target].emoji} ${target} held their ground!`);
+}
+if(myFaction){document.getElementById('war-pick').style.display='none';document.getElementById('war-board').style.display='block';renderWar();}
 
 // SOS BUTTON
 let sosMessages=JSON.parse(localStorage.getItem('kr_sos')||'[]');
