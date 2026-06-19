@@ -259,6 +259,65 @@ footer p{font-size:0.5rem;letter-spacing:3px;color:#222233;margin-top:8px;}
   </div>
 </section>
 
+<!-- KIDRISING SPACE PROGRAM -->
+<section id="space" style="padding:100px 20px;border-top:1px solid #4488ff22;position:relative;z-index:1;text-align:center;">
+  <div style="max-width:800px;margin:0 auto;">
+    <div style="font-size:0.6rem;letter-spacing:8px;color:#224488;margin-bottom:16px;">KIDRISING PRESENTS</div>
+    <div style="font-size:clamp(1.5rem,6vw,3.5rem);font-weight:900;letter-spacing:8px;background:linear-gradient(135deg,#4488ff,#cc44ff,#fff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:8px;">🚀 KID SPACE PROGRAM</div>
+    <div style="font-size:0.55rem;letter-spacing:5px;color:#333355;margin-bottom:48px;">THE FIRST SPACE PROGRAM RUN BY KIDS. FOR ALL OF HUMANITY.</div>
+
+    <!-- Mission Stats -->
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:16px;margin-bottom:60px;">
+      <div style="background:rgba(68,136,255,0.05);border:1px solid rgba(68,136,255,0.12);border-radius:16px;padding:24px;">
+        <div style="font-size:2rem;font-weight:900;color:#4488ff;" id="space-astronauts">0</div>
+        <div style="font-size:0.45rem;letter-spacing:4px;color:#224488;margin-top:6px;">KID ASTRONAUTS</div>
+      </div>
+      <div style="background:rgba(204,68,255,0.05);border:1px solid rgba(204,68,255,0.12);border-radius:16px;padding:24px;">
+        <div style="font-size:2rem;font-weight:900;color:#cc44ff;" id="space-missions">0</div>
+        <div style="font-size:0.45rem;letter-spacing:4px;color:#442266;margin-top:6px;">MISSIONS PLANNED</div>
+      </div>
+      <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:16px;padding:24px;">
+        <div style="font-size:2rem;font-weight:900;color:#fff;">∞</div>
+        <div style="font-size:0.45rem;letter-spacing:4px;color:#333355;margin-top:6px;">GALAXIES TO EXPLORE</div>
+      </div>
+    </div>
+
+    <!-- Join as Astronaut -->
+    <div style="background:rgba(68,136,255,0.03);border:1px solid rgba(68,136,255,0.12);border-radius:24px;padding:36px;margin-bottom:32px;">
+      <div style="font-size:0.7rem;font-weight:900;letter-spacing:5px;color:#4488ff;margin-bottom:8px;">🚀 BECOME A KID ASTRONAUT</div>
+      <div style="font-size:0.55rem;letter-spacing:3px;color:#224488;margin-bottom:24px;">SIGN UP FOR THE KIDRISING SPACE PROGRAM</div>
+      <input id="space-name" type="text" placeholder="Your name" style="width:100%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:50px;padding:14px 20px;color:#fff;font-size:0.65rem;letter-spacing:2px;font-family:'Courier New',monospace;outline:none;margin-bottom:10px;">
+      <input id="space-country" type="text" placeholder="Your country" style="width:100%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:50px;padding:14px 20px;color:#fff;font-size:0.65rem;letter-spacing:2px;font-family:'Courier New',monospace;outline:none;margin-bottom:10px;">
+      <input id="space-dream" type="text" placeholder="Your space dream (e.g. I want to land on Mars)" style="width:100%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:50px;padding:14px 20px;color:#fff;font-size:0.65rem;letter-spacing:2px;font-family:'Courier New',monospace;outline:none;margin-bottom:16px;">
+      <button onclick="joinSpaceProgram()" style="width:100%;padding:16px;background:linear-gradient(135deg,#4488ff,#cc44ff);border:none;color:#fff;font-size:0.8rem;font-weight:900;letter-spacing:5px;cursor:pointer;border-radius:50px;font-family:'Courier New',monospace;">🚀 JOIN THE MISSION</button>
+      <div id="space-confirm" style="display:none;margin-top:16px;font-size:0.65rem;letter-spacing:3px;color:#4488ff;text-align:center;"></div>
+    </div>
+
+    <!-- Mission Planner -->
+    <div style="background:rgba(204,68,255,0.03);border:1px solid rgba(204,68,255,0.12);border-radius:24px;padding:36px;margin-bottom:32px;">
+      <div style="font-size:0.7rem;font-weight:900;letter-spacing:5px;color:#cc44ff;margin-bottom:8px;">🛸 PLAN A MISSION</div>
+      <div style="font-size:0.55rem;letter-spacing:3px;color:#442266;margin-bottom:24px;">WHERE SHOULD KIDRISING GO IN SPACE?</div>
+      <input id="mission-name" type="text" placeholder="Mission name (e.g. Operation Mars Kids)" style="width:100%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:50px;padding:14px 20px;color:#fff;font-size:0.65rem;letter-spacing:2px;font-family:'Courier New',monospace;outline:none;margin-bottom:10px;">
+      <input id="mission-dest" type="text" placeholder="Destination (e.g. Mars, Moon, Jupiter)" style="width:100%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:50px;padding:14px 20px;color:#fff;font-size:0.65rem;letter-spacing:2px;font-family:'Courier New',monospace;outline:none;margin-bottom:10px;">
+      <textarea id="mission-plan" placeholder="What is the mission? What will kids do there?" style="width:100%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:20px;padding:16px 20px;color:#fff;font-size:0.65rem;letter-spacing:2px;font-family:'Courier New',monospace;outline:none;height:100px;resize:none;margin-bottom:16px;"></textarea>
+      <button onclick="submitMission()" style="width:100%;padding:16px;background:linear-gradient(135deg,#cc44ff,#4488ff);border:none;color:#fff;font-size:0.8rem;font-weight:900;letter-spacing:5px;cursor:pointer;border-radius:50px;font-family:'Courier New',monospace;">🛸 SUBMIT MISSION</button>
+      <div id="mission-confirm" style="display:none;margin-top:16px;font-size:0.65rem;letter-spacing:3px;color:#cc44ff;text-align:center;"></div>
+    </div>
+
+    <!-- Astronaut Roll & Missions -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+      <div>
+        <div style="font-size:0.55rem;letter-spacing:4px;color:#224488;margin-bottom:12px;">👨‍🚀 KID ASTRONAUTS</div>
+        <div id="astronaut-list"></div>
+      </div>
+      <div>
+        <div style="font-size:0.55rem;letter-spacing:4px;color:#442266;margin-bottom:12px;">🛸 PLANNED MISSIONS</div>
+        <div id="mission-list"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- DECLARATION OF KIDRISING -->
 <section id="declaration" style="padding:100px 20px;border-top:1px solid #ffcc0033;position:relative;z-index:1;text-align:center;">
   <div style="max-width:760px;margin:0 auto;">
@@ -564,6 +623,50 @@ function submitNews(){
   document.getElementById('news-story').value='';
 }
 renderNews();
+
+// SPACE PROGRAM
+let astronauts=JSON.parse(localStorage.getItem('kr_astronauts')||'[]');
+let missions=JSON.parse(localStorage.getItem('kr_missions')||'[]');
+function renderSpace(){
+  document.getElementById('space-astronauts').textContent=astronauts.length;
+  document.getElementById('space-missions').textContent=missions.length;
+  const al=document.getElementById('astronaut-list');
+  al.innerHTML=astronauts.slice(-8).reverse().map(a=>`<div style="background:rgba(68,136,255,0.04);border:1px solid rgba(68,136,255,0.08);border-radius:12px;padding:12px;margin-bottom:8px;"><div style="font-size:0.6rem;font-weight:900;color:#4488ff;letter-spacing:2px;">👨‍🚀 ${a.name.toUpperCase()}</div><div style="font-size:0.5rem;color:#224488;letter-spacing:2px;">${a.country} · ${a.dream}</div></div>`).join('')||'<div style="font-size:0.5rem;color:#222233;text-align:center;">No astronauts yet!</div>';
+  const ml=document.getElementById('mission-list');
+  ml.innerHTML=missions.slice(-8).reverse().map(m=>`<div style="background:rgba(204,68,255,0.04);border:1px solid rgba(204,68,255,0.08);border-radius:12px;padding:12px;margin-bottom:8px;"><div style="font-size:0.6rem;font-weight:900;color:#cc44ff;letter-spacing:2px;">🛸 ${m.name.toUpperCase()}</div><div style="font-size:0.5rem;color:#442266;letter-spacing:2px;">→ ${m.dest}</div></div>`).join('')||'<div style="font-size:0.5rem;color:#222233;text-align:center;">No missions yet!</div>';
+}
+function joinSpaceProgram(){
+  const name=sanitize(document.getElementById('space-name').value.trim());
+  const country=sanitize(document.getElementById('space-country').value.trim());
+  const dream=sanitize(document.getElementById('space-dream').value.trim());
+  if(!name||!country||!dream)return;
+  astronauts.push({name,country,dream});
+  localStorage.setItem('kr_astronauts',JSON.stringify(astronauts));
+  renderSpace();
+  const c=document.getElementById('space-confirm');
+  c.style.display='block';
+  c.innerHTML=`🚀 WELCOME ASTRONAUT ${name.toUpperCase()}! YOUR DREAM IS LOGGED.`;
+  document.getElementById('space-name').value='';
+  document.getElementById('space-country').value='';
+  document.getElementById('space-dream').value='';
+  for(let i=0;i<10;i++)spawnParticle();
+}
+function submitMission(){
+  const name=sanitize(document.getElementById('mission-name').value.trim());
+  const dest=sanitize(document.getElementById('mission-dest').value.trim());
+  const plan=sanitize(document.getElementById('mission-plan').value.trim());
+  if(!name||!dest||!plan)return;
+  missions.push({name,dest,plan});
+  localStorage.setItem('kr_missions',JSON.stringify(missions));
+  renderSpace();
+  const c=document.getElementById('mission-confirm');
+  c.style.display='block';
+  c.innerHTML=`🛸 MISSION "${name.toUpperCase()}" LOGGED! DESTINATION: ${dest.toUpperCase()}`;
+  document.getElementById('mission-name').value='';
+  document.getElementById('mission-dest').value='';
+  document.getElementById('mission-plan').value='';
+}
+renderSpace();
 
 // KID WAR
 const FACTIONS={FIRE:{emoji:'🔥',color:'#ff4400'},STORM:{emoji:'⚡',color:'#4488ff'},EARTH:{emoji:'🌍',color:'#44ffaa'},SHADOW:{emoji:'🌑',color:'#cc44ff'},ADMIN:{emoji:'👑',color:'#ffcc00'}};
