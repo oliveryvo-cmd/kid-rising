@@ -259,6 +259,72 @@ footer p{font-size:0.5rem;letter-spacing:3px;color:#222233;margin-top:8px;}
   </div>
 </section>
 
+<!-- PLANET KIDRISING -->
+<section id="planet" style="padding:100px 20px;border-top:1px solid #44ffaa22;position:relative;z-index:1;text-align:center;">
+  <div style="max-width:900px;margin:0 auto;">
+    <div style="font-size:0.6rem;letter-spacing:8px;color:#224433;margin-bottom:16px;">DISCOVERED BY OLIVER VO · AGE 10 · YEAR 2026</div>
+    <div style="font-size:clamp(1.5rem,6vw,3.5rem);font-weight:900;letter-spacing:8px;background:linear-gradient(135deg,#44ffaa,#4488ff,#cc44ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:8px;">🪐 PLANET KIDRISING</div>
+    <div style="font-size:0.55rem;letter-spacing:5px;color:#333355;margin-bottom:60px;">A WORLD BUILT BY KIDS. ONE PIECE AT A TIME.</div>
+
+    <!-- Planet Display -->
+    <div style="position:relative;width:220px;height:220px;margin:0 auto 60px;">
+      <div style="width:220px;height:220px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#44ffaa,#4488ff,#cc44ff,#030308);box-shadow:0 0 80px rgba(68,255,170,0.3),0 0 160px rgba(68,136,255,0.15);animation:spinPlanet 20s linear infinite;"></div>
+      <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:3rem;">🪐</div>
+    </div>
+    <style>@keyframes spinPlanet{0%{box-shadow:0 0 80px rgba(68,255,170,0.3),0 0 160px rgba(68,136,255,0.15);}50%{box-shadow:0 0 80px rgba(204,68,255,0.3),0 0 160px rgba(68,255,170,0.15);}100%{box-shadow:0 0 80px rgba(68,255,170,0.3),0 0 160px rgba(68,136,255,0.15);}}</style>
+
+    <!-- Planet Stats -->
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px;margin-bottom:60px;">
+      <div style="background:rgba(68,255,170,0.04);border:1px solid rgba(68,255,170,0.1);border-radius:16px;padding:20px;">
+        <div style="font-size:0.55rem;letter-spacing:4px;color:#224433;margin-bottom:8px;">PLANET NAME</div>
+        <div style="font-size:0.8rem;font-weight:900;color:#44ffaa;">KIDRISIA</div>
+      </div>
+      <div style="background:rgba(68,136,255,0.04);border:1px solid rgba(68,136,255,0.1);border-radius:16px;padding:20px;">
+        <div style="font-size:0.55rem;letter-spacing:4px;color:#224488;margin-bottom:8px;">STAR</div>
+        <div style="font-size:0.8rem;font-weight:900;color:#4488ff;">NOVA OLIVER</div>
+      </div>
+      <div style="background:rgba(204,68,255,0.04);border:1px solid rgba(204,68,255,0.1);border-radius:16px;padding:20px;">
+        <div style="font-size:0.55rem;letter-spacing:4px;color:#442266;margin-bottom:8px;">CREATURES</div>
+        <div style="font-size:0.8rem;font-weight:900;color:#cc44ff;" id="planet-creature-count">0</div>
+      </div>
+      <div style="background:rgba(255,204,0,0.04);border:1px solid rgba(255,204,0,0.1);border-radius:16px;padding:20px;">
+        <div style="font-size:0.55rem;letter-spacing:4px;color:#554400;margin-bottom:8px;">CITIES</div>
+        <div style="font-size:0.8rem;font-weight:900;color:#ffcc00;" id="planet-city-count">0</div>
+      </div>
+    </div>
+
+    <!-- Add a Creature -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:40px;">
+      <div style="background:rgba(204,68,255,0.03);border:1px solid rgba(204,68,255,0.12);border-radius:24px;padding:28px;text-align:left;">
+        <div style="font-size:0.65rem;font-weight:900;letter-spacing:4px;color:#cc44ff;margin-bottom:16px;">👾 ADD A CREATURE</div>
+        <input id="creature-name" type="text" placeholder="Creature name" style="width:100%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:50px;padding:12px 18px;color:#fff;font-size:0.6rem;letter-spacing:2px;font-family:'Courier New',monospace;outline:none;margin-bottom:8px;">
+        <input id="creature-desc" type="text" placeholder="What does it look like?" style="width:100%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:50px;padding:12px 18px;color:#fff;font-size:0.6rem;letter-spacing:2px;font-family:'Courier New',monospace;outline:none;margin-bottom:8px;">
+        <input id="creature-power" type="text" placeholder="Its superpower" style="width:100%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:50px;padding:12px 18px;color:#fff;font-size:0.6rem;letter-spacing:2px;font-family:'Courier New',monospace;outline:none;margin-bottom:12px;">
+        <button onclick="addCreature()" style="width:100%;padding:12px;background:linear-gradient(135deg,#cc44ff,#4488ff);border:none;color:#fff;font-size:0.65rem;font-weight:900;letter-spacing:4px;cursor:pointer;border-radius:50px;font-family:'Courier New',monospace;">👾 ADD</button>
+      </div>
+      <div style="background:rgba(255,204,0,0.03);border:1px solid rgba(255,204,0,0.12);border-radius:24px;padding:28px;text-align:left;">
+        <div style="font-size:0.65rem;font-weight:900;letter-spacing:4px;color:#ffcc00;margin-bottom:16px;">🏙️ BUILD A CITY</div>
+        <input id="city-name" type="text" placeholder="City name" style="width:100%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:50px;padding:12px 18px;color:#fff;font-size:0.6rem;letter-spacing:2px;font-family:'Courier New',monospace;outline:none;margin-bottom:8px;">
+        <input id="city-desc" type="text" placeholder="What is it like?" style="width:100%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:50px;padding:12px 18px;color:#fff;font-size:0.6rem;letter-spacing:2px;font-family:'Courier New',monospace;outline:none;margin-bottom:8px;">
+        <input id="city-founder" type="text" placeholder="Your name" style="width:100%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:50px;padding:12px 18px;color:#fff;font-size:0.6rem;letter-spacing:2px;font-family:'Courier New',monospace;outline:none;margin-bottom:12px;">
+        <button onclick="addCity()" style="width:100%;padding:12px;background:linear-gradient(135deg,#ffcc00,#ff4400);border:none;color:#000;font-size:0.65rem;font-weight:900;letter-spacing:4px;cursor:pointer;border-radius:50px;font-family:'Courier New',monospace;">🏙️ BUILD</button>
+      </div>
+    </div>
+
+    <!-- Creatures & Cities List -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+      <div>
+        <div style="font-size:0.5rem;letter-spacing:4px;color:#442266;margin-bottom:12px;">👾 CREATURES OF KIDRISIA</div>
+        <div id="creature-list"></div>
+      </div>
+      <div>
+        <div style="font-size:0.5rem;letter-spacing:4px;color:#554400;margin-bottom:12px;">🏙️ CITIES OF KIDRISIA</div>
+        <div id="city-list"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- KIDRISING TV -->
 <section id="krtv" style="padding:100px 20px;border-top:1px solid #ff44aa22;position:relative;z-index:1;">
   <div style="text-align:center;margin-bottom:48px;">
@@ -664,6 +730,45 @@ function submitNews(){
   document.getElementById('news-story').value='';
 }
 renderNews();
+
+// PLANET KIDRISING
+let creatures=JSON.parse(localStorage.getItem('kr_creatures')||'[]');
+let cities=JSON.parse(localStorage.getItem('kr_cities')||'[]');
+function renderPlanet(){
+  document.getElementById('planet-creature-count').textContent=creatures.length;
+  document.getElementById('planet-city-count').textContent=cities.length;
+  const cl=document.getElementById('creature-list');
+  cl.innerHTML=creatures.slice(-10).reverse().map(c=>`<div style="background:rgba(204,68,255,0.04);border:1px solid rgba(204,68,255,0.08);border-radius:12px;padding:12px;margin-bottom:8px;"><div style="font-size:0.65rem;font-weight:900;color:#cc44ff;letter-spacing:2px;">👾 ${c.name.toUpperCase()}</div><div style="font-size:0.5rem;color:#442266;letter-spacing:1px;margin-top:4px;">${c.desc}</div><div style="font-size:0.5rem;color:#6644aa;letter-spacing:1px;margin-top:2px;">⚡ ${c.power}</div></div>`).join('')||'<div style="font-size:0.5rem;color:#222233;text-align:center;">No creatures yet!</div>';
+  const cityEl=document.getElementById('city-list');
+  cityEl.innerHTML=cities.slice(-10).reverse().map(c=>`<div style="background:rgba(255,204,0,0.04);border:1px solid rgba(255,204,0,0.08);border-radius:12px;padding:12px;margin-bottom:8px;"><div style="font-size:0.65rem;font-weight:900;color:#ffcc00;letter-spacing:2px;">🏙️ ${c.name.toUpperCase()}</div><div style="font-size:0.5rem;color:#554400;letter-spacing:1px;margin-top:4px;">${c.desc}</div><div style="font-size:0.5rem;color:#332200;letter-spacing:1px;margin-top:2px;">FOUNDED BY ${c.founder.toUpperCase()}</div></div>`).join('')||'<div style="font-size:0.5rem;color:#222233;text-align:center;">No cities yet!</div>';
+}
+function addCreature(){
+  const name=sanitize(document.getElementById('creature-name').value.trim());
+  const desc=sanitize(document.getElementById('creature-desc').value.trim());
+  const power=sanitize(document.getElementById('creature-power').value.trim());
+  if(!name||!desc||!power)return;
+  creatures.push({name,desc,power});
+  localStorage.setItem('kr_creatures',JSON.stringify(creatures));
+  renderPlanet();
+  document.getElementById('creature-name').value='';
+  document.getElementById('creature-desc').value='';
+  document.getElementById('creature-power').value='';
+  for(let i=0;i<6;i++)spawnParticle();
+}
+function addCity(){
+  const name=sanitize(document.getElementById('city-name').value.trim());
+  const desc=sanitize(document.getElementById('city-desc').value.trim());
+  const founder=sanitize(document.getElementById('city-founder').value.trim());
+  if(!name||!desc||!founder)return;
+  cities.push({name,desc,founder});
+  localStorage.setItem('kr_cities',JSON.stringify(cities));
+  renderPlanet();
+  document.getElementById('city-name').value='';
+  document.getElementById('city-desc').value='';
+  document.getElementById('city-founder').value='';
+  for(let i=0;i<6;i++)spawnParticle();
+}
+renderPlanet();
 
 // KIDRISING TV
 let shows=JSON.parse(localStorage.getItem('kr_shows')||'[]');
