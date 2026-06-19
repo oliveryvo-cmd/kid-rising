@@ -259,6 +259,47 @@ footer p{font-size:0.5rem;letter-spacing:3px;color:#222233;margin-top:8px;}
   </div>
 </section>
 
+<!-- KIDRISING TV -->
+<section id="krtv" style="padding:100px 20px;border-top:1px solid #ff44aa22;position:relative;z-index:1;">
+  <div style="text-align:center;margin-bottom:48px;">
+    <div style="font-size:clamp(1.2rem,5vw,2.5rem);font-weight:900;letter-spacing:8px;margin-bottom:8px;background:linear-gradient(135deg,#ff44aa,#ffcc00,#ff4444);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">📺 KIDRISING TV</div>
+    <div style="font-size:0.55rem;letter-spacing:5px;color:#333355;">SHOWS BY KIDS. FOR KIDS. NO ADULTS. NO ADS. EVER.</div>
+  </div>
+
+  <!-- Featured Show -->
+  <div style="max-width:760px;margin:0 auto 60px;">
+    <div style="font-size:0.5rem;letter-spacing:5px;color:#ff44aa88;margin-bottom:12px;text-align:center;">⭐ FEATURED SHOW</div>
+    <div style="background:rgba(255,68,170,0.04);border:1px solid rgba(255,68,170,0.15);border-radius:20px;overflow:hidden;">
+      <div style="position:relative;padding-bottom:56.25%;height:0;">
+        <iframe src="https://www.youtube.com/embed/3vy8gkjiATg" style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;" allowfullscreen></iframe>
+      </div>
+      <div style="padding:24px;">
+        <div style="font-size:0.9rem;font-weight:900;letter-spacing:4px;color:#fff;margin-bottom:8px;">STAND UP — EPISODE 1</div>
+        <div style="font-size:0.55rem;letter-spacing:3px;color:#ff44aa;">WRITTEN & DIRECTED BY OLIVER VO · AGE 10</div>
+        <div style="font-size:0.55rem;letter-spacing:2px;color:#553344;margin-top:8px;">1.3 billion disabled superheroes rise up. The first movie ever made for KidRising.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- All Shows -->
+  <div style="max-width:760px;margin:0 auto 60px;">
+    <div style="font-size:0.5rem;letter-spacing:5px;color:#333355;margin-bottom:20px;text-align:center;">📺 ALL SHOWS</div>
+    <div id="tv-shows" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;"></div>
+  </div>
+
+  <!-- Submit Your Show -->
+  <div style="max-width:600px;margin:0 auto;background:rgba(255,68,170,0.03);border:1px solid rgba(255,68,170,0.12);border-radius:24px;padding:36px;">
+    <div style="font-size:0.7rem;font-weight:900;letter-spacing:5px;color:#ff44aa;margin-bottom:8px;text-align:center;">📹 SUBMIT YOUR SHOW</div>
+    <div style="font-size:0.5rem;letter-spacing:3px;color:#553344;margin-bottom:24px;text-align:center;">GOT A VIDEO? PUT IT ON KIDRISING TV!</div>
+    <input id="tv-name" type="text" placeholder="Your name" style="width:100%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:50px;padding:14px 20px;color:#fff;font-size:0.65rem;letter-spacing:2px;font-family:'Courier New',monospace;outline:none;margin-bottom:10px;">
+    <input id="tv-title" type="text" placeholder="Show title" style="width:100%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:50px;padding:14px 20px;color:#fff;font-size:0.65rem;letter-spacing:2px;font-family:'Courier New',monospace;outline:none;margin-bottom:10px;">
+    <input id="tv-url" type="text" placeholder="YouTube link (youtube.com/watch?v=...)" style="width:100%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:50px;padding:14px 20px;color:#fff;font-size:0.65rem;letter-spacing:2px;font-family:'Courier New',monospace;outline:none;margin-bottom:10px;">
+    <input id="tv-desc" type="text" placeholder="What is your show about?" style="width:100%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:50px;padding:14px 20px;color:#fff;font-size:0.65rem;letter-spacing:2px;font-family:'Courier New',monospace;outline:none;margin-bottom:16px;">
+    <button onclick="submitShow()" style="width:100%;padding:16px;background:linear-gradient(135deg,#ff44aa,#ffcc00);border:none;color:#000;font-size:0.8rem;font-weight:900;letter-spacing:5px;cursor:pointer;border-radius:50px;font-family:'Courier New',monospace;">📺 SUBMIT SHOW</button>
+    <div id="tv-confirm" style="display:none;margin-top:16px;font-size:0.65rem;letter-spacing:3px;color:#ff44aa;text-align:center;"></div>
+  </div>
+</section>
+
 <!-- KIDRISING SPACE PROGRAM -->
 <section id="space" style="padding:100px 20px;border-top:1px solid #4488ff22;position:relative;z-index:1;text-align:center;">
   <div style="max-width:800px;margin:0 auto;">
@@ -623,6 +664,34 @@ function submitNews(){
   document.getElementById('news-story').value='';
 }
 renderNews();
+
+// KIDRISING TV
+let shows=JSON.parse(localStorage.getItem('kr_shows')||'[]');
+function getYTEmbed(url){const m=url.match(/(?:v=|youtu\.be\/)([a-zA-Z0-9_-]{11})/);return m?m[1]:null;}
+function renderShows(){
+  const grid=document.getElementById('tv-shows');
+  if(!shows.length){grid.innerHTML='<div style="text-align:center;font-size:0.55rem;letter-spacing:3px;color:#222233;grid-column:1/-1;">No shows yet. Be the first to submit!</div>';return;}
+  grid.innerHTML=shows.map(s=>{const id=getYTEmbed(s.url);return id?`<div style="background:rgba(255,68,170,0.03);border:1px solid rgba(255,68,170,0.1);border-radius:16px;overflow:hidden;"><div style="position:relative;padding-bottom:56.25%;height:0;"><iframe src="https://www.youtube.com/embed/${id}" style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;" allowfullscreen></iframe></div><div style="padding:16px;"><div style="font-size:0.7rem;font-weight:900;letter-spacing:3px;color:#fff;margin-bottom:4px;">${s.title.toUpperCase()}</div><div style="font-size:0.5rem;letter-spacing:2px;color:#ff44aa;">BY ${s.name.toUpperCase()}</div><div style="font-size:0.5rem;letter-spacing:2px;color:#553344;margin-top:6px;">${s.desc}</div></div></div>`:'';}).join('');
+}
+function submitShow(){
+  const name=sanitize(document.getElementById('tv-name').value.trim());
+  const title=sanitize(document.getElementById('tv-title').value.trim());
+  const url=document.getElementById('tv-url').value.trim();
+  const desc=sanitize(document.getElementById('tv-desc').value.trim());
+  if(!name||!title||!url||!desc)return;
+  if(!getYTEmbed(url)){alert('Please enter a valid YouTube link!');return;}
+  shows.push({name,title,url,desc});
+  localStorage.setItem('kr_shows',JSON.stringify(shows));
+  renderShows();
+  const c=document.getElementById('tv-confirm');
+  c.style.display='block';
+  c.innerHTML=`📺 "${title.toUpperCase()}" IS NOW ON KIDRISING TV!`;
+  document.getElementById('tv-name').value='';
+  document.getElementById('tv-title').value='';
+  document.getElementById('tv-url').value='';
+  document.getElementById('tv-desc').value='';
+}
+renderShows();
 
 // SPACE PROGRAM
 let astronauts=JSON.parse(localStorage.getItem('kr_astronauts')||'[]');
