@@ -101,13 +101,27 @@ footer p{font-size:0.5rem;letter-spacing:3px;color:#222233;margin-top:8px;}
 <canvas id="bg"></canvas>
 <nav>
   <div class="nav-logo">🌍👑 KIDRISING</div>
-  <div class="nav-links">
-    <a class="nav-btn outline" href="#universe">EXPLORE</a>
-    <a class="nav-btn outline" href="#mission">MISSION</a>
-    <a class="nav-btn fill" href="#join">JOIN THE RISING</a>
-    <button class="nav-btn outline" onclick="openAdmin()" style="color:#ff4444;border-color:#ff444422;">🛡️ ADMIN</button>
+  <button onclick="toggleMenu()" style="display:none;background:transparent;border:1px solid rgba(255,255,255,0.1);color:#fff;padding:8px 14px;border-radius:50px;cursor:pointer;font-size:0.7rem;font-family:'Courier New',monospace;" id="menu-toggle">☰ MENU</button>
+  <div class="nav-links" id="nav-links">
+    <a class="nav-btn outline" href="#universe">🎮 UNIVERSE</a>
+    <a class="nav-btn outline" href="#worldgov">🌍 VOTE</a>
+    <a class="nav-btn outline" href="#krtv">📺 TV</a>
+    <a class="nav-btn outline" href="#kidwar">⚔️ WAR</a>
+    <a class="nav-btn outline" href="#space">🚀 SPACE</a>
+    <a class="nav-btn outline" href="#planet">🪐 PLANET</a>
+    <a class="nav-btn outline" href="#kidchat">💬 CHAT</a>
+    <a class="nav-btn outline" href="#kidnews">📡 NEWS</a>
+    <a class="nav-btn fill" href="#join">⚡ JOIN</a>
+    <button class="nav-btn outline" onclick="openAdmin()" style="color:#ff4444;border-color:#ff444422;">🛡️</button>
   </div>
 </nav>
+<style>
+@media(max-width:768px){
+  #nav-links{display:none;position:fixed;top:60px;left:0;right:0;background:rgba(3,3,8,0.98);flex-direction:column;padding:20px;gap:8px;z-index:99;border-bottom:1px solid #ffffff08;}
+  #nav-links.open{display:flex;}
+  #menu-toggle{display:block!important;}
+}
+</style>
 <section id="hero">
   <div class="hero-tag">⚡ THE BIGGEST THING KIDS HAVE EVER BUILT</div>
   <h1 class="hero-title"><span class="kid">KID</span><span class="rising">RISING</span></h1>
@@ -632,6 +646,8 @@ footer p{font-size:0.5rem;letter-spacing:3px;color:#222233;margin-top:8px;}
   <p style="margin-top:8px;">A NEW CIVILIZATION BUILT BY KIDS · FOR EVERY HUMAN ON EARTH · FREE FOREVER</p>
 </footer>
 <script>
+function toggleMenu(){const n=document.getElementById('nav-links');n.classList.toggle('open');}
+
 // Security
 const ADMIN_PASS='Oliver Is Good';
 const BAD_WORDS=['hate','stupid','idiot','shut up','dumb','ugly','loser','kill','die','sex','porn','damn','hell','crap','ass','shit','fuck','bitch'];
