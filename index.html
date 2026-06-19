@@ -259,6 +259,43 @@ footer p{font-size:0.5rem;letter-spacing:3px;color:#222233;margin-top:8px;}
   </div>
 </section>
 
+<!-- WORLD GOVERNMENT -->
+<section id="worldgov" style="padding:100px 20px;border-top:1px solid #ffcc0033;position:relative;z-index:1;text-align:center;">
+  <div style="max-width:800px;margin:0 auto;">
+    <div style="font-size:0.6rem;letter-spacing:8px;color:#554400;margin-bottom:16px;">KIDRISING PRESENTS</div>
+    <div style="font-size:clamp(1.5rem,6vw,3.5rem);font-weight:900;letter-spacing:8px;background:linear-gradient(135deg,#ffcc00,#fff,#4488ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:8px;">🌍 WORLD GOVERNMENT</div>
+    <div style="font-size:0.55rem;letter-spacing:5px;color:#333355;margin-bottom:8px;">THE FIRST GOVERNMENT RUN ENTIRELY BY KIDS.</div>
+    <div style="font-size:0.5rem;letter-spacing:4px;color:#222233;margin-bottom:60px;">EVERY KID VOTES. THE WORLD LISTENS.</div>
+
+    <!-- This Month's Vote -->
+    <div style="background:rgba(255,204,0,0.04);border:2px solid rgba(255,204,0,0.2);border-radius:24px;padding:40px;margin-bottom:48px;">
+      <div style="font-size:0.5rem;letter-spacing:5px;color:#554400;margin-bottom:16px;">🗳️ THIS MONTH'S WORLD QUESTION</div>
+      <div style="font-size:clamp(1rem,3vw,1.8rem);font-weight:900;letter-spacing:4px;color:#fff;margin-bottom:32px;" id="wg-question">WHAT IS THE BIGGEST PROBLEM IN THE WORLD THAT KIDS WANT FIXED?</div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-bottom:24px;" id="wg-options">
+        <button onclick="castVote('STOP BULLYING')" class="vote-btn" style="background:rgba(255,68,68,0.08);border:1px solid rgba(255,68,68,0.2);border-radius:16px;padding:20px;color:#ff4444;font-size:0.65rem;font-weight:900;letter-spacing:3px;cursor:pointer;font-family:'Courier New',monospace;transition:all 0.2s;">🤬 STOP BULLYING</button>
+        <button onclick="castVote('SAVE THE PLANET')" class="vote-btn" style="background:rgba(68,255,170,0.08);border:1px solid rgba(68,255,170,0.2);border-radius:16px;padding:20px;color:#44ffaa;font-size:0.65rem;font-weight:900;letter-spacing:3px;cursor:pointer;font-family:'Courier New',monospace;transition:all 0.2s;">🌍 SAVE THE PLANET</button>
+        <button onclick="castVote('END HUNGER')" class="vote-btn" style="background:rgba(255,204,0,0.08);border:1px solid rgba(255,204,0,0.2);border-radius:16px;padding:20px;color:#ffcc00;font-size:0.65rem;font-weight:900;letter-spacing:3px;cursor:pointer;font-family:'Courier New',monospace;transition:all 0.2s;">🍞 END HUNGER</button>
+        <button onclick="castVote('PROTECT DISABLED KIDS')" class="vote-btn" style="background:rgba(68,136,255,0.08);border:1px solid rgba(68,136,255,0.2);border-radius:16px;padding:20px;color:#4488ff;font-size:0.65rem;font-weight:900;letter-spacing:3px;cursor:pointer;font-family:'Courier New',monospace;transition:all 0.2s;">♿ PROTECT DISABLED KIDS</button>
+      </div>
+      <div id="wg-voted" style="display:none;font-size:0.7rem;letter-spacing:4px;color:#ffcc00;">⚡ YOUR VOTE HAS BEEN COUNTED!</div>
+    </div>
+
+    <!-- Results -->
+    <div style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:24px;padding:36px;margin-bottom:48px;">
+      <div style="font-size:0.55rem;letter-spacing:5px;color:#333355;margin-bottom:24px;">📊 LIVE RESULTS</div>
+      <div id="wg-results"></div>
+      <div style="margin-top:20px;font-size:0.5rem;letter-spacing:3px;color:#222233;" id="wg-total"></div>
+    </div>
+
+    <!-- Send to UN -->
+    <div style="background:rgba(68,136,255,0.03);border:1px solid rgba(68,136,255,0.12);border-radius:20px;padding:32px;">
+      <div style="font-size:0.65rem;font-weight:900;letter-spacing:5px;color:#4488ff;margin-bottom:8px;">📨 SEND RESULTS TO THE WORLD</div>
+      <div style="font-size:0.5rem;letter-spacing:3px;color:#224488;margin-bottom:20px;">WHEN ENOUGH KIDS VOTE, WE SEND THE RESULTS TO REAL WORLD LEADERS.</div>
+      <div style="font-size:0.55rem;letter-spacing:3px;color:#333355;">THE UNITED NATIONS · WORLD LEADERS · GOVERNMENTS EVERYWHERE</div>
+    </div>
+  </div>
+</section>
+
 <!-- PLANET KIDRISING -->
 <section id="planet" style="padding:100px 20px;border-top:1px solid #44ffaa22;position:relative;z-index:1;text-align:center;">
   <div style="max-width:900px;margin:0 auto;">
@@ -730,6 +767,33 @@ function submitNews(){
   document.getElementById('news-story').value='';
 }
 renderNews();
+
+// WORLD GOVERNMENT
+let wgVotes=JSON.parse(localStorage.getItem('kr_wg_votes')||'{"STOP BULLYING":0,"SAVE THE PLANET":0,"END HUNGER":0,"PROTECT DISABLED KIDS":0}');
+const wgVoted=localStorage.getItem('kr_wg_voted');
+function renderWGResults(){
+  const total=Object.values(wgVotes).reduce((a,b)=>a+b,0);
+  document.getElementById('wg-total').textContent=`TOTAL VOTES: ${total}`;
+  const results=document.getElementById('wg-results');
+  const sorted=Object.entries(wgVotes).sort((a,b)=>b[1]-a[1]);
+  results.innerHTML=sorted.map(([opt,count])=>{
+    const pct=total?Math.round(count/total*100):0;
+    const colors={'STOP BULLYING':'#ff4444','SAVE THE PLANET':'#44ffaa','END HUNGER':'#ffcc00','PROTECT DISABLED KIDS':'#4488ff'};
+    return`<div style="margin-bottom:16px;"><div style="display:flex;justify-content:space-between;margin-bottom:6px;"><span style="font-size:0.6rem;letter-spacing:2px;color:${colors[opt]};">${opt}</span><span style="font-size:0.6rem;color:#555577;">${count} votes · ${pct}%</span></div><div style="background:rgba(255,255,255,0.04);border-radius:50px;height:8px;"><div style="background:${colors[opt]};height:8px;border-radius:50px;width:${pct}%;transition:width 0.5s;"></div></div></div>`;
+  }).join('');
+  if(wgVoted){document.getElementById('wg-options').style.display='none';document.getElementById('wg-voted').style.display='block';}
+}
+function castVote(option){
+  if(localStorage.getItem('kr_wg_voted')){alert('You already voted this month!');return;}
+  wgVotes[option]=(wgVotes[option]||0)+1;
+  localStorage.setItem('kr_wg_votes',JSON.stringify(wgVotes));
+  localStorage.setItem('kr_wg_voted','1');
+  document.getElementById('wg-options').style.display='none';
+  document.getElementById('wg-voted').style.display='block';
+  renderWGResults();
+  for(let i=0;i<10;i++)spawnParticle();
+}
+renderWGResults();
 
 // PLANET KIDRISING
 let creatures=JSON.parse(localStorage.getItem('kr_creatures')||'[]');
