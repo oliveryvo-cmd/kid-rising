@@ -259,6 +259,32 @@ footer p{font-size:0.5rem;letter-spacing:3px;color:#222233;margin-top:8px;}
   </div>
 </section>
 
+<!-- KID EMERGENCY BUTTON -->
+<section id="sos" style="padding:100px 20px;border-top:1px solid #ff444433;position:relative;z-index:1;text-align:center;">
+  <div style="font-size:clamp(1.2rem,5vw,2.5rem);font-weight:900;letter-spacing:8px;margin-bottom:8px;color:#ff4444;">🆘 KID EMERGENCY BUTTON</div>
+  <div style="font-size:0.55rem;letter-spacing:5px;color:#333355;margin-bottom:48px;">BEING BULLIED? FEEL UNSAFE? FEEL ALONE? PRESS THE BUTTON.</div>
+
+  <div id="sos-normal">
+    <button onclick="pressSOSButton()" style="width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,#ff2222,#880000);border:6px solid #ff4444;color:#fff;font-size:1.5rem;font-weight:900;letter-spacing:4px;cursor:pointer;box-shadow:0 0 60px rgba(255,68,68,0.5),0 0 120px rgba(255,68,68,0.2);transition:all 0.2s;font-family:'Courier New',monospace;display:block;margin:0 auto 32px;">
+      🆘<br><span style="font-size:0.6rem;letter-spacing:5px;">I NEED<br>HELP</span>
+    </button>
+    <p style="font-size:0.6rem;letter-spacing:3px;color:#441111;max-width:400px;margin:0 auto;">You are NOT alone. Press the button and the KidRising community will rally around you instantly.</p>
+  </div>
+
+  <div id="sos-active" style="display:none;max-width:600px;margin:0 auto;">
+    <div style="font-size:3rem;margin-bottom:16px;">💛</div>
+    <div style="font-size:1rem;font-weight:900;letter-spacing:6px;color:#ffcc00;margin-bottom:16px;">WE SEE YOU. WE'RE HERE.</div>
+    <div style="font-size:0.65rem;letter-spacing:3px;color:#888877;line-height:2.4;margin-bottom:32px;">You are brave for reaching out. You are NOT alone.<br>The KidRising community is with you right now.<br><br>If you are in danger, please also tell a trusted adult<br>or call <strong style="color:#ffcc00;">911</strong> (USA) or your local emergency number.</div>
+    <div style="background:rgba(255,204,0,0.05);border:1px solid rgba(255,204,0,0.15);border-radius:20px;padding:28px;margin-bottom:24px;">
+      <div style="font-size:0.6rem;letter-spacing:4px;color:#ffcc00;margin-bottom:16px;">💬 TELL US WHAT'S HAPPENING (OPTIONAL)</div>
+      <textarea id="sos-msg" placeholder="You can share here if you want. No one will judge you." style="width:100%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:16px;color:#fff;font-size:0.6rem;letter-spacing:2px;font-family:'Courier New',monospace;outline:none;height:100px;resize:none;margin-bottom:16px;"></textarea>
+      <button onclick="sendSOSMessage()" style="width:100%;padding:14px;background:linear-gradient(135deg,#ffcc00,#ff4444);border:none;color:#000;font-size:0.7rem;font-weight:900;letter-spacing:4px;cursor:pointer;border-radius:50px;font-family:'Courier New',monospace;">💛 SEND TO COMMUNITY</button>
+    </div>
+    <div id="sos-feed"></div>
+    <button onclick="document.getElementById('sos-active').style.display='none';document.getElementById('sos-normal').style.display='block';" style="margin-top:24px;background:transparent;border:1px solid #333355;color:#555577;padding:10px 24px;border-radius:50px;cursor:pointer;font-size:0.55rem;letter-spacing:3px;font-family:'Courier New',monospace;">I'm okay now ✓</button>
+  </div>
+</section>
+
 <!-- KID CHAT -->
 <section id="kidchat" style="padding:100px 20px;border-top:1px solid #44ffaa22;position:relative;z-index:1;">
   <div style="text-align:center;margin-bottom:48px;">
@@ -442,6 +468,29 @@ function submitNews(){
   document.getElementById('news-story').value='';
 }
 renderNews();
+
+// SOS BUTTON
+let sosMessages=JSON.parse(localStorage.getItem('kr_sos')||'[]');
+function pressSOSButton(){
+  document.getElementById('sos-normal').style.display='none';
+  document.getElementById('sos-active').style.display='block';
+  renderSOS();
+  document.getElementById('sos-active').scrollIntoView({behavior:'smooth'});
+}
+function renderSOS(){
+  const feed=document.getElementById('sos-feed');
+  const recent=sosMessages.slice(-20).reverse();
+  if(!recent.length){feed.innerHTML='<div style="text-align:center;font-size:0.55rem;letter-spacing:3px;color:#222233;">No messages yet. You can be the first to share.</div>';return;}
+  feed.innerHTML=recent.map(m=>`<div style="background:rgba(255,204,0,0.03);border:1px solid rgba(255,204,0,0.08);border-radius:14px;padding:16px;margin-bottom:10px;text-align:left;"><div style="font-size:0.5rem;letter-spacing:3px;color:#ffcc0066;margin-bottom:6px;">💛 A KID SHARED</div><div style="font-size:0.6rem;letter-spacing:2px;color:#aaaacc;line-height:2;">${m.text}</div><div style="font-size:0.45rem;letter-spacing:2px;color:#223322;margin-top:8px;">${m.replies||0} kids sent love</div></div>`).join('');
+}
+function sendSOSMessage(){
+  const text=sanitize(document.getElementById('sos-msg').value.trim());
+  if(!text)return;
+  sosMessages.push({text,time:Date.now(),replies:0});
+  localStorage.setItem('kr_sos',JSON.stringify(sosMessages));
+  renderSOS();
+  document.getElementById('sos-msg').value='';
+}
 
 // KID CHAT
 let chats=JSON.parse(localStorage.getItem('kr_chat')||'[]');
