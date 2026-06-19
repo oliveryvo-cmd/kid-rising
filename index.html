@@ -286,6 +286,11 @@ footer p{font-size:0.5rem;letter-spacing:3px;color:#222233;margin-top:8px;}
         <div style="font-size:3rem;margin-bottom:8px;">🌑</div>
         <div style="font-size:0.7rem;font-weight:900;letter-spacing:4px;color:#cc44ff;">SHADOW</div>
       </div>
+      <div onclick="joinAdminFaction()" style="background:rgba(255,204,0,0.06);border:2px solid rgba(255,204,0,0.4);border-radius:16px;padding:24px;text-align:center;cursor:pointer;transition:all 0.2s;position:relative;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+        <div style="font-size:3rem;margin-bottom:8px;">👑</div>
+        <div style="font-size:0.7rem;font-weight:900;letter-spacing:4px;color:#ffcc00;">ADMIN</div>
+        <div style="font-size:0.45rem;letter-spacing:2px;color:#554400;margin-top:4px;">FOUNDER ONLY 🔒</div>
+      </div>
     </div>
   </div>
 
@@ -303,6 +308,7 @@ footer p{font-size:0.5rem;letter-spacing:3px;color:#222233;margin-top:8px;}
         <option value="STORM">⚡ Attack STORM</option>
         <option value="EARTH">🌍 Attack EARTH</option>
         <option value="SHADOW">🌑 Attack SHADOW</option>
+        <option value="ADMIN">👑 Attack ADMIN</option>
       </select>
       <button onclick="launchAttack()" style="width:100%;padding:14px;background:linear-gradient(135deg,#ff4400,#ff4444);border:none;color:#fff;font-size:0.75rem;font-weight:900;letter-spacing:5px;cursor:pointer;border-radius:50px;font-family:'Courier New',monospace;">⚔️ ATTACK!</button>
     </div>
@@ -524,11 +530,16 @@ function submitNews(){
 renderNews();
 
 // KID WAR
-const FACTIONS={FIRE:{emoji:'🔥',color:'#ff4400'},STORM:{emoji:'⚡',color:'#4488ff'},EARTH:{emoji:'🌍',color:'#44ffaa'},SHADOW:{emoji:'🌑',color:'#cc44ff'}};
-let warData=JSON.parse(localStorage.getItem('kr_war')||'{"territories":{"FIRE":6,"STORM":6,"EARTH":6,"SHADOW":7},"log":[],"coins":{"FIRE":0,"STORM":0,"EARTH":0,"SHADOW":0}}');
+const FACTIONS={FIRE:{emoji:'🔥',color:'#ff4400'},STORM:{emoji:'⚡',color:'#4488ff'},EARTH:{emoji:'🌍',color:'#44ffaa'},SHADOW:{emoji:'🌑',color:'#cc44ff'},ADMIN:{emoji:'👑',color:'#ffcc00'}};
+let warData=JSON.parse(localStorage.getItem('kr_war')||'{"territories":{"FIRE":5,"STORM":5,"EARTH":5,"SHADOW":5,"ADMIN":5},"log":[],"coins":{"FIRE":0,"STORM":0,"EARTH":0,"SHADOW":0,"ADMIN":0}}');
 let myFaction=localStorage.getItem('kr_my_faction')||null;
 let myWarName=localStorage.getItem('kr_war_name')||null;
 
+function joinAdminFaction(){
+  const pass=prompt('Enter founder password:');
+  if(pass!==ADMIN_PASS){alert('Wrong password! This faction is for the founder only.');return;}
+  joinFaction('ADMIN','#ffcc00','👑');
+}
 function joinFaction(name,color,emoji){
   const n=prompt(`Welcome to ${emoji} ${name}! Enter your warrior name:`);
   if(!n||!n.trim())return;
