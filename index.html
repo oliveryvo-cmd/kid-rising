@@ -112,6 +112,19 @@ footer p{font-size:0.5rem;letter-spacing:3px;color:#222233;margin-top:8px;}
     <a class="nav-btn outline" href="#kidchat">💬 CHAT</a>
     <a class="nav-btn outline" href="#kidnews">📡 NEWS</a>
     <a class="nav-btn fill" href="#join">⚡ JOIN</a>
+    <select id="lang-select" onchange="translatePage(this.value)" style="background:#0a0a14;border:1px solid rgba(255,255,255,0.1);border-radius:50px;padding:8px 14px;color:#fff;font-size:0.55rem;font-family:'Courier New',monospace;outline:none;cursor:pointer;">
+      <option value="">🌍 LANGUAGE</option>
+      <option value="es">🇪🇸 ESPAÑOL</option>
+      <option value="fr">🇫🇷 FRANÇAIS</option>
+      <option value="ar">🇸🇦 العربية</option>
+      <option value="zh">🇨🇳 中文</option>
+      <option value="hi">🇮🇳 हिन्दी</option>
+      <option value="pt">🇧🇷 PORTUGUÊS</option>
+      <option value="ja">🇯🇵 日本語</option>
+      <option value="ko">🇰🇷 한국어</option>
+      <option value="de">🇩🇪 DEUTSCH</option>
+      <option value="ru">🇷🇺 РУССКИЙ</option>
+    </select>
     <button class="nav-btn outline" onclick="openAdmin()" style="color:#ff4444;border-color:#ff444422;">🛡️</button>
   </div>
 </nav>
@@ -711,6 +724,12 @@ footer p{font-size:0.5rem;letter-spacing:3px;color:#222233;margin-top:8px;}
   <p style="margin-top:8px;">A NEW CIVILIZATION BUILT BY KIDS · FOR EVERY HUMAN ON EARTH · FREE FOREVER</p>
 </footer>
 <script>
+function translatePage(lang){
+  if(!lang)return;
+  const url=`https://translate.google.com/translate?sl=en&tl=${lang}&u=${encodeURIComponent(window.location.href)}`;
+  window.open(url,'_blank');
+  document.getElementById('lang-select').value='';
+}
 function toggleMenu(){const n=document.getElementById('nav-links');n.classList.toggle('open');}
 
 // Security
