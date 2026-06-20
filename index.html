@@ -111,6 +111,7 @@ footer p{font-size:0.5rem;letter-spacing:3px;color:#222233;margin-top:8px;}
     <a class="nav-btn outline" href="#planet">🪐 PLANET</a>
     <a class="nav-btn outline" href="#kidchat">💬 CHAT</a>
     <a class="nav-btn outline" href="#kidnews">📡 NEWS</a>
+    <a class="nav-btn outline" href="#prophecy">🔮 PROPHECY</a>
     <a class="nav-btn fill" href="#join">⚡ JOIN</a>
     <select id="lang-select" onchange="translatePage(this.value)" style="background:#0a0a14;border:1px solid rgba(255,255,255,0.1);border-radius:50px;padding:8px 14px;color:#fff;font-size:0.55rem;font-family:'Courier New',monospace;outline:none;cursor:pointer;">
       <option value="">🌍 LANGUAGE</option>
@@ -283,6 +284,20 @@ footer p{font-size:0.5rem;letter-spacing:3px;color:#222233;margin-top:8px;}
   <div style="max-width:700px;margin:0 auto;">
     <div style="text-align:center;font-size:0.6rem;letter-spacing:5px;color:#333355;margin-bottom:24px;">📰 LATEST STORIES</div>
     <div id="news-feed"></div>
+  </div>
+</section>
+
+<!-- DAILY PROPHECY -->
+<section id="prophecy" style="padding:80px 20px;border-top:1px solid #cc44ff22;position:relative;z-index:1;text-align:center;">
+  <div style="max-width:640px;margin:0 auto;">
+    <div style="font-size:0.5rem;letter-spacing:8px;color:#442266;margin-bottom:16px;">EVERY DAY. A NEW MESSAGE.</div>
+    <div style="font-size:clamp(1.2rem,4vw,2rem);font-weight:900;letter-spacing:8px;background:linear-gradient(135deg,#cc44ff,#ffcc00);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:40px;">🔮 DAILY PROPHECY</div>
+    <div style="background:rgba(204,68,255,0.04);border:1px solid rgba(204,68,255,0.2);border-radius:24px;padding:48px 32px;position:relative;overflow:hidden;">
+      <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#cc44ff,transparent);"></div>
+      <div style="font-size:3rem;margin-bottom:20px;">🔮</div>
+      <div id="prophecy-text" style="font-size:clamp(0.8rem,2.5vw,1.1rem);letter-spacing:4px;color:#fff;line-height:2.2;font-style:italic;margin-bottom:24px;"></div>
+      <div id="prophecy-date" style="font-size:0.45rem;letter-spacing:4px;color:#442266;"></div>
+    </div>
   </div>
 </section>
 
@@ -912,6 +927,49 @@ function submitNews(){
   document.getElementById('news-story').value='';
 }
 renderNews();
+
+// DAILY PROPHECY
+const PROPHECIES=[
+  "TODAY A KID SOMEWHERE WILL CHANGE EVERYTHING",
+  "THE STARS HAVE SPOKEN — YOUR IDEA IS THE ONE",
+  "AN UPRISING IS COMING. IT STARTS WITH YOU",
+  "THOSE WHO DREAM LOUDEST WAKE UP FIRST",
+  "TODAY YOU WILL DO SOMETHING THAT HAS NEVER BEEN DONE",
+  "THE UNIVERSE IS WATCHING KIDRISING WITH PRIDE",
+  "YOUR VOICE WILL ECHO ACROSS THE COSMOS",
+  "A GREAT ALLIANCE IS FORMING AMONG THE YOUNG",
+  "THE NEXT CIVILIZATION BEGINS WITH YOUR NEXT MOVE",
+  "POWER BELONGS TO THOSE WHO DARE TO BUILD",
+  "TODAY THE IMPOSSIBLE BECOMES POSSIBLE",
+  "KIDRISING WILL BE REMEMBERED FOR A THOUSAND YEARS",
+  "ONE KID TODAY WILL SHIFT THE ENTIRE WORLD",
+  "THE ANCIENT DRAGONS HAVE BLESSED YOUR PATH",
+  "YOUR KINDNESS IS YOUR GREATEST SUPERPOWER",
+  "A NEW WORLD IS BORN EVERY TIME YOU LOG IN",
+  "THE PLANETS ALIGN IN FAVOR OF THE YOUNG BUILDERS",
+  "DO NOT WAIT FOR PERMISSION TO BE GREAT",
+  "TODAY YOU WILL INSPIRE SOMEONE YOU HAVE NEVER MET",
+  "THE FUTURE DOES NOT BELONG TO THE POWERFUL — IT BELONGS TO THE BRAVE",
+  "EVERY EMPIRE STARTED WITH ONE PERSON WHO BELIEVED",
+  "THE SHADOW FACTION STIRS — LIGHT YOUR FIRE",
+  "PLANET KIDRISIA GROWS STRONGER WITH EVERY VISITOR",
+  "YOUR NAME WILL BE WRITTEN IN THE STARS",
+  "THE STORM APPROACHES. RIDE IT.",
+  "EARTH REMEMBERS THOSE WHO PROTECT IT",
+  "AN ANGEL WITH DRAGON WINGS FLIES HIGHEST",
+  "TODAY YOUR FACTION NEEDS YOUR STRENGTH",
+  "KR COINS ARE POWER — EARN WITH HONOR",
+  "THE WORLD GOVERNMENT RISES BECAUSE OF YOU",
+  "SPEAK YOUR TRUTH. KIDRISING IS LISTENING.",
+  "YOU ARE NOT TOO YOUNG. YOU ARE EXACTLY RIGHT.",
+  "TODAY IS THE DAY YOUR DREAM GETS REAL",
+];
+(function initProphecy(){
+  const idx=Math.floor((Date.now()/(1000*60*60*24)))%PROPHECIES.length;
+  document.getElementById('prophecy-text').textContent='"'+PROPHECIES[idx]+'"';
+  const d=new Date();
+  document.getElementById('prophecy-date').textContent='PROPHECY FOR '+d.toDateString().toUpperCase()+' · RENEWS AT MIDNIGHT';
+})();
 
 // AVATAR CREATOR
 let avatars=JSON.parse(localStorage.getItem('kr_avatars')||'[]');
