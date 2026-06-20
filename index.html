@@ -253,7 +253,7 @@ footer p{font-size:0.5rem;letter-spacing:3px;color:#222233;margin-top:8px;}
   <!-- Coin Claim -->
   <div style="max-width:500px;margin:0 auto;background:rgba(255,204,0,0.03);border:1px solid rgba(255,204,0,0.15);border-radius:24px;padding:36px;">
     <div style="text-align:center;margin-bottom:24px;font-size:0.7rem;letter-spacing:4px;color:#ffcc00;">⚡ CLAIM YOUR COINS</div>
-    <input id="coin-name" type="text" placeholder="Your name" style="width:100%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:50px;padding:14px 20px;color:#fff;font-size:0.65rem;letter-spacing:2px;font-family:'Courier New',monospace;outline:none;margin-bottom:10px;">
+    <input id="coin-name" type="text" placeholder="Your username" style="width:100%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:50px;padding:14px 20px;color:#fff;font-size:0.65rem;letter-spacing:2px;font-family:'Courier New',monospace;outline:none;margin-bottom:10px;">
     <select id="coin-act" style="width:100%;background:#0a0a14;border:1px solid rgba(255,255,255,0.1);border-radius:50px;padding:14px 20px;color:#fff;font-size:0.65rem;letter-spacing:2px;font-family:'Courier New',monospace;outline:none;margin-bottom:10px;">
       <option value="10">💛 Did a kind act (+10 coins)</option>
       <option value="25">📰 Reported news (+25 coins)</option>
@@ -278,7 +278,7 @@ footer p{font-size:0.5rem;letter-spacing:3px;color:#222233;margin-top:8px;}
   <!-- Submit Story -->
   <div style="max-width:600px;margin:0 auto 60px;background:rgba(68,136,255,0.03);border:1px solid rgba(68,136,255,0.15);border-radius:24px;padding:36px;">
     <div style="font-size:0.65rem;letter-spacing:4px;color:#4488ff;margin-bottom:20px;">📰 SUBMIT YOUR STORY</div>
-    <input id="news-name" type="text" placeholder="Your name" style="width:100%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:50px;padding:14px 20px;color:#fff;font-size:0.65rem;letter-spacing:2px;font-family:'Courier New',monospace;outline:none;margin-bottom:10px;">
+    <input id="news-name" type="text" placeholder="Your username" style="width:100%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:50px;padding:14px 20px;color:#fff;font-size:0.65rem;letter-spacing:2px;font-family:'Courier New',monospace;outline:none;margin-bottom:10px;">
     <input id="news-headline" type="text" placeholder="Headline (make it big!)" style="width:100%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:50px;padding:14px 20px;color:#fff;font-size:0.65rem;letter-spacing:2px;font-family:'Courier New',monospace;outline:none;margin-bottom:10px;">
     <textarea id="news-story" placeholder="Tell the full story..." style="width:100%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:20px;padding:16px 20px;color:#fff;font-size:0.65rem;letter-spacing:2px;font-family:'Courier New',monospace;outline:none;margin-bottom:16px;height:120px;resize:none;"></textarea>
     <button onclick="submitNews()" style="width:100%;padding:16px;background:linear-gradient(135deg,#4488ff,#cc44ff);border:none;color:#fff;font-size:0.8rem;font-weight:900;letter-spacing:5px;cursor:pointer;border-radius:50px;font-family:'Courier New',monospace;">📡 PUBLISH STORY</button>
@@ -343,7 +343,7 @@ footer p{font-size:0.5rem;letter-spacing:3px;color:#222233;margin-top:8px;}
     <!-- WRITE FORM -->
     <div id="tc-form" style="background:rgba(68,255,170,0.03);border:1px solid rgba(68,255,170,0.15);border-radius:24px;padding:40px 32px;margin-bottom:32px;">
       <div style="font-size:0.55rem;letter-spacing:4px;color:#44ffaa;margin-bottom:20px;">SEAL A MESSAGE FOR THE FUTURE</div>
-      <input id="tc-name" type="text" placeholder="Your name" maxlength="30" style="width:100%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:50px;padding:14px 24px;color:#fff;font-size:0.65rem;letter-spacing:3px;font-family:'Courier New',monospace;outline:none;margin-bottom:12px;">
+      <input id="tc-name" type="text" placeholder="Your username" maxlength="30" style="width:100%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:50px;padding:14px 24px;color:#fff;font-size:0.65rem;letter-spacing:3px;font-family:'Courier New',monospace;outline:none;margin-bottom:12px;">
       <textarea id="tc-msg" placeholder="Write your message to the future..." maxlength="280" style="width:100%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:20px;padding:16px 24px;color:#fff;font-size:0.65rem;letter-spacing:2px;font-family:'Courier New',monospace;outline:none;resize:none;height:100px;margin-bottom:12px;"></textarea>
       <div style="display:flex;gap:10px;align-items:center;margin-bottom:20px;flex-wrap:wrap;justify-content:center;">
         <label style="font-size:0.5rem;letter-spacing:3px;color:#336655;">OPEN ON:</label>
@@ -366,7 +366,7 @@ footer p{font-size:0.5rem;letter-spacing:3px;color:#222233;margin-top:8px;}
     <!-- BADGE LOOKUP -->
     <div style="background:rgba(255,68,170,0.03);border:1px solid rgba(255,68,170,0.15);border-radius:20px;padding:28px;margin-bottom:32px;max-width:500px;margin-left:auto;margin-right:auto;">
       <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
-        <input id="badge-name" type="text" placeholder="Enter your name to see your badges" style="flex:1;min-width:200px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:50px;padding:12px 20px;color:#fff;font-size:0.6rem;letter-spacing:2px;font-family:'Courier New',monospace;outline:none;">
+        <input id="badge-name" type="text" placeholder="Enter your username to see your badges" style="flex:1;min-width:200px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:50px;padding:12px 20px;color:#fff;font-size:0.6rem;letter-spacing:2px;font-family:'Courier New',monospace;outline:none;">
         <button onclick="lookupBadges()" style="padding:12px 24px;background:linear-gradient(135deg,#ff44aa,#cc44ff);border:none;border-radius:50px;color:#fff;font-size:0.6rem;font-weight:900;letter-spacing:3px;cursor:pointer;font-family:'Courier New',monospace;">CHECK</button>
       </div>
       <div id="badge-result" style="margin-top:24px;"></div>
@@ -385,7 +385,7 @@ footer p{font-size:0.5rem;letter-spacing:3px;color:#222233;margin-top:8px;}
     <div style="background:rgba(68,255,170,0.03);border:1px solid rgba(68,255,170,0.15);border-radius:20px;padding:32px;margin-bottom:32px;">
       <div style="font-size:0.55rem;letter-spacing:5px;color:#22aa66;margin-bottom:20px;">POST A QUEST</div>
       <div style="display:flex;flex-direction:column;gap:12px;max-width:500px;margin:0 auto;">
-        <input id="q-name" type="text" placeholder="Your name" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:50px;padding:12px 20px;color:#fff;font-size:0.6rem;letter-spacing:2px;font-family:'Courier New',monospace;outline:none;">
+        <input id="q-name" type="text" placeholder="Your username" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:50px;padding:12px 20px;color:#fff;font-size:0.6rem;letter-spacing:2px;font-family:'Courier New',monospace;outline:none;">
         <input id="q-title" type="text" placeholder="Quest title (e.g. HELP ME CLEAN THE PARK)" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:50px;padding:12px 20px;color:#fff;font-size:0.6rem;letter-spacing:2px;font-family:'Courier New',monospace;outline:none;">
         <select id="q-type" style="background:#030308;border:1px solid rgba(255,255,255,0.08);border-radius:50px;padding:12px 20px;color:#fff;font-size:0.6rem;letter-spacing:2px;font-family:'Courier New',monospace;outline:none;">
           <option value="🌍 EARTH">🌍 EARTH QUEST</option>
@@ -433,7 +433,7 @@ footer p{font-size:0.5rem;letter-spacing:3px;color:#222233;margin-top:8px;}
     <div style="background:rgba(255,255,255,0.01);border:1px solid rgba(255,255,255,0.06);border-radius:20px;padding:28px;">
       <div style="font-size:0.5rem;letter-spacing:5px;color:#441133;margin-bottom:16px;">📢 SEND A SHOUTOUT</div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;max-width:500px;margin:0 auto;">
-        <input id="radio-name" type="text" placeholder="Your name" style="flex:1;min-width:140px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:50px;padding:10px 18px;color:#fff;font-size:0.55rem;letter-spacing:2px;font-family:'Courier New',monospace;outline:none;">
+        <input id="radio-name" type="text" placeholder="Your username" style="flex:1;min-width:140px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:50px;padding:10px 18px;color:#fff;font-size:0.55rem;letter-spacing:2px;font-family:'Courier New',monospace;outline:none;">
         <input id="radio-msg" type="text" placeholder="Your shoutout..." style="flex:2;min-width:200px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:50px;padding:10px 18px;color:#fff;font-size:0.55rem;letter-spacing:2px;font-family:'Courier New',monospace;outline:none;">
         <button onclick="sendShoutout()" style="padding:10px 24px;background:linear-gradient(135deg,#ff44aa,#cc44ff);border:none;border-radius:50px;color:#fff;font-size:0.55rem;font-weight:900;letter-spacing:3px;cursor:pointer;font-family:'Courier New',monospace;">📢 SEND</button>
       </div>
@@ -472,7 +472,7 @@ footer p{font-size:0.5rem;letter-spacing:3px;color:#222233;margin-top:8px;}
       <div style="background:rgba(204,68,255,0.03);border:1px solid rgba(204,68,255,0.12);border-radius:24px;padding:28px;text-align:left;">
         <div style="font-size:0.6rem;letter-spacing:4px;color:#cc44ff;margin-bottom:20px;">✏️ DESIGN YOUR AVATAR</div>
         <label style="font-size:0.5rem;letter-spacing:3px;color:#555577;display:block;margin-bottom:6px;">YOUR NAME</label>
-        <input id="av-name" type="text" placeholder="Enter your name" oninput="updateAvatar()" style="width:100%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:50px;padding:10px 16px;color:#fff;font-size:0.6rem;letter-spacing:2px;font-family:'Courier New',monospace;outline:none;margin-bottom:12px;">
+        <input id="av-name" type="text" placeholder="Enter your username" oninput="updateAvatar()" style="width:100%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:50px;padding:10px 16px;color:#fff;font-size:0.6rem;letter-spacing:2px;font-family:'Courier New',monospace;outline:none;margin-bottom:12px;">
         <label style="font-size:0.5rem;letter-spacing:3px;color:#555577;display:block;margin-bottom:6px;">🐉 DRAGON WING COLOR</label>
         <input type="color" id="av-dragon" value="#ff4400" oninput="updateAvatar()" style="width:100%;height:40px;border:none;border-radius:12px;cursor:pointer;background:transparent;margin-bottom:12px;">
         <label style="font-size:0.5rem;letter-spacing:3px;color:#555577;display:block;margin-bottom:6px;">😇 ANGEL WING GLOW</label>
@@ -654,7 +654,7 @@ footer p{font-size:0.5rem;letter-spacing:3px;color:#222233;margin-top:8px;}
         <div style="font-size:0.65rem;font-weight:900;letter-spacing:4px;color:#ffcc00;margin-bottom:16px;">🏙️ BUILD A CITY</div>
         <input id="city-name" type="text" placeholder="City name" style="width:100%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:50px;padding:12px 18px;color:#fff;font-size:0.6rem;letter-spacing:2px;font-family:'Courier New',monospace;outline:none;margin-bottom:8px;">
         <input id="city-desc" type="text" placeholder="What is it like?" style="width:100%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:50px;padding:12px 18px;color:#fff;font-size:0.6rem;letter-spacing:2px;font-family:'Courier New',monospace;outline:none;margin-bottom:8px;">
-        <input id="city-founder" type="text" placeholder="Your name" style="width:100%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:50px;padding:12px 18px;color:#fff;font-size:0.6rem;letter-spacing:2px;font-family:'Courier New',monospace;outline:none;margin-bottom:12px;">
+        <input id="city-founder" type="text" placeholder="Your username" style="width:100%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:50px;padding:12px 18px;color:#fff;font-size:0.6rem;letter-spacing:2px;font-family:'Courier New',monospace;outline:none;margin-bottom:12px;">
         <button onclick="addCity()" style="width:100%;padding:12px;background:linear-gradient(135deg,#ffcc00,#ff4400);border:none;color:#000;font-size:0.65rem;font-weight:900;letter-spacing:4px;cursor:pointer;border-radius:50px;font-family:'Courier New',monospace;">🏙️ BUILD</button>
       </div>
     </div>
@@ -705,7 +705,7 @@ footer p{font-size:0.5rem;letter-spacing:3px;color:#222233;margin-top:8px;}
   <div style="max-width:600px;margin:0 auto;background:rgba(255,68,170,0.03);border:1px solid rgba(255,68,170,0.12);border-radius:24px;padding:36px;">
     <div style="font-size:0.7rem;font-weight:900;letter-spacing:5px;color:#ff44aa;margin-bottom:8px;text-align:center;">📹 SUBMIT YOUR SHOW</div>
     <div style="font-size:0.5rem;letter-spacing:3px;color:#553344;margin-bottom:24px;text-align:center;">GOT A VIDEO? PUT IT ON KIDRISING TV!</div>
-    <input id="tv-name" type="text" placeholder="Your name" style="width:100%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:50px;padding:14px 20px;color:#fff;font-size:0.65rem;letter-spacing:2px;font-family:'Courier New',monospace;outline:none;margin-bottom:10px;">
+    <input id="tv-name" type="text" placeholder="Your username" style="width:100%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:50px;padding:14px 20px;color:#fff;font-size:0.65rem;letter-spacing:2px;font-family:'Courier New',monospace;outline:none;margin-bottom:10px;">
     <input id="tv-title" type="text" placeholder="Show title" style="width:100%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:50px;padding:14px 20px;color:#fff;font-size:0.65rem;letter-spacing:2px;font-family:'Courier New',monospace;outline:none;margin-bottom:10px;">
     <input id="tv-url" type="text" placeholder="YouTube link (youtube.com/watch?v=...)" style="width:100%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:50px;padding:14px 20px;color:#fff;font-size:0.65rem;letter-spacing:2px;font-family:'Courier New',monospace;outline:none;margin-bottom:10px;">
     <input id="tv-desc" type="text" placeholder="What is your show about?" style="width:100%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:50px;padding:14px 20px;color:#fff;font-size:0.65rem;letter-spacing:2px;font-family:'Courier New',monospace;outline:none;margin-bottom:16px;">
@@ -741,7 +741,7 @@ footer p{font-size:0.5rem;letter-spacing:3px;color:#222233;margin-top:8px;}
     <div style="background:rgba(68,136,255,0.03);border:1px solid rgba(68,136,255,0.12);border-radius:24px;padding:36px;margin-bottom:32px;">
       <div style="font-size:0.7rem;font-weight:900;letter-spacing:5px;color:#4488ff;margin-bottom:8px;">🚀 BECOME A KID ASTRONAUT</div>
       <div style="font-size:0.55rem;letter-spacing:3px;color:#224488;margin-bottom:24px;">SIGN UP FOR THE KIDRISING SPACE PROGRAM</div>
-      <input id="space-name" type="text" placeholder="Your name" style="width:100%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:50px;padding:14px 20px;color:#fff;font-size:0.65rem;letter-spacing:2px;font-family:'Courier New',monospace;outline:none;margin-bottom:10px;">
+      <input id="space-name" type="text" placeholder="Your username" style="width:100%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:50px;padding:14px 20px;color:#fff;font-size:0.65rem;letter-spacing:2px;font-family:'Courier New',monospace;outline:none;margin-bottom:10px;">
       <input id="space-country" type="text" placeholder="Your country" style="width:100%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:50px;padding:14px 20px;color:#fff;font-size:0.65rem;letter-spacing:2px;font-family:'Courier New',monospace;outline:none;margin-bottom:10px;">
       <input id="space-dream" type="text" placeholder="Your space dream (e.g. I want to land on Mars)" style="width:100%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:50px;padding:14px 20px;color:#fff;font-size:0.65rem;letter-spacing:2px;font-family:'Courier New',monospace;outline:none;margin-bottom:16px;">
       <button onclick="joinSpaceProgram()" style="width:100%;padding:16px;background:linear-gradient(135deg,#4488ff,#cc44ff);border:none;color:#fff;font-size:0.8rem;font-weight:900;letter-spacing:5px;cursor:pointer;border-radius:50px;font-family:'Courier New',monospace;">🚀 JOIN THE MISSION</button>
@@ -906,7 +906,7 @@ footer p{font-size:0.5rem;letter-spacing:3px;color:#222233;margin-top:8px;}
       <div style="text-align:center;font-size:0.55rem;letter-spacing:3px;color:#222233;">Be kind. No bad words. No links. Have fun! ⚡</div>
     </div>
     <div style="display:flex;gap:10px;flex-wrap:wrap;">
-      <input id="chat-name" type="text" placeholder="Your name" style="width:140px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:50px;padding:12px 18px;color:#fff;font-size:0.6rem;letter-spacing:2px;font-family:'Courier New',monospace;outline:none;">
+      <input id="chat-name" type="text" placeholder="Your username" style="width:140px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:50px;padding:12px 18px;color:#fff;font-size:0.6rem;letter-spacing:2px;font-family:'Courier New',monospace;outline:none;">
       <input id="chat-msg" type="text" placeholder="Say something..." style="flex:1;min-width:160px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:50px;padding:12px 18px;color:#fff;font-size:0.6rem;letter-spacing:2px;font-family:'Courier New',monospace;outline:none;">
       <button onclick="sendChat()" style="padding:12px 28px;background:linear-gradient(135deg,#44ffaa,#4488ff);border:none;color:#000;font-size:0.65rem;font-weight:900;letter-spacing:3px;cursor:pointer;border-radius:50px;font-family:'Courier New',monospace;">SEND ⚡</button>
     </div>
@@ -932,7 +932,7 @@ footer p{font-size:0.5rem;letter-spacing:3px;color:#222233;margin-top:8px;}
   <div class="join-sub">BE PART OF SOMETHING BIGGER THAN ANYTHING</div>
   <div id="join-form-wrap">
     <div class="join-form">
-      <input class="join-input" id="j-name" type="text" placeholder="Your first name">
+      <input class="join-input" id="j-name" type="text" placeholder="Choose a username">
       <input class="join-input" id="j-country" type="text" placeholder="Your country">
       <button class="join-btn" onclick="showOath()">⚡ RISE UP</button>
     </div>
@@ -1035,7 +1035,7 @@ document.getElementById('c-kids').textContent=members.length||1;
 function showOath(){
   const name=document.getElementById('j-name').value.trim();
   const country=document.getElementById('j-country').value.trim();
-  if(!name||!country){alert('Please enter your name and country!');return;}
+  if(!name||!country){alert('Please enter your username and country!');return;}
   document.getElementById('join-form-wrap').style.display='none';
   document.getElementById('oath-screen').style.display='block';
 }
@@ -1077,7 +1077,7 @@ function claimCoins(){
   const amount=parseInt(document.getElementById('coin-act').value);
   const desc=sanitize(document.getElementById('coin-desc').value.trim());
   if(!name||!desc)return;
-  if(name===''||desc===''){alert('Fill in your name and what you did!');return;}
+  if(name===''||desc===''){alert('Fill in your username and what you did!');return;}
   coins.push({name,amount,desc,date:new Date().toLocaleDateString()});
   localStorage.setItem('kr_coins',JSON.stringify(coins));
   renderCoinBoard();
@@ -1386,7 +1386,7 @@ function updateAvatar(){
 }
 function saveAvatar(){
   const name=document.getElementById('av-name').value.trim();
-  if(!name){alert('Enter your name first!');return;}
+  if(!name){alert('Enter your username first!');return;}
   const dragon=document.getElementById('av-dragon').value;
   const angel=document.getElementById('av-angel').value;
   const faction=document.getElementById('av-faction').value;
