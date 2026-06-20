@@ -111,6 +111,8 @@ footer p{font-size:0.5rem;letter-spacing:3px;color:#222233;margin-top:8px;}
     <a class="nav-btn outline" href="#planet">🪐 PLANET</a>
     <a class="nav-btn outline" href="#kidchat">💬 CHAT</a>
     <a class="nav-btn outline" href="#kidnews">📡 NEWS</a>
+    <a class="nav-btn outline" href="#timecapsule">🕰️ CAPSULE</a>
+    <a class="nav-btn outline" href="#quests">⚔️ QUESTS</a>
     <a class="nav-btn outline" href="#halloffame">👑 FAME</a>
     <a class="nav-btn outline" href="#prophecy">🔮 PROPHECY</a>
     <a class="nav-btn fill" href="#join">⚡ JOIN</a>
@@ -329,6 +331,53 @@ footer p{font-size:0.5rem;letter-spacing:3px;color:#222233;margin-top:8px;}
       <div id="hof-wall" style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;"></div>
       <div style="margin-top:24px;font-size:0.45rem;letter-spacing:3px;color:#222233;">JOIN KIDRISING · EARN KR COINS · FIGHT IN KID WAR · POST NEWS · LAUNCH INTO SPACE · BECOME LEGEND</div>
     </div>
+  </div>
+</section>
+
+<!-- TIME CAPSULE -->
+<section id="timecapsule" style="padding:80px 20px;border-top:1px solid #44ffaa22;position:relative;z-index:1;text-align:center;">
+  <div style="max-width:680px;margin:0 auto;">
+    <div style="font-size:0.5rem;letter-spacing:8px;color:#003322;margin-bottom:16px;">WRITE TO THE FUTURE</div>
+    <div style="font-size:clamp(1.2rem,4vw,2rem);font-weight:900;letter-spacing:8px;background:linear-gradient(135deg,#44ffaa,#ffcc00);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:40px;">🕰️ TIME CAPSULE</div>
+    <!-- WRITE FORM -->
+    <div id="tc-form" style="background:rgba(68,255,170,0.03);border:1px solid rgba(68,255,170,0.15);border-radius:24px;padding:40px 32px;margin-bottom:32px;">
+      <div style="font-size:0.55rem;letter-spacing:4px;color:#44ffaa;margin-bottom:20px;">SEAL A MESSAGE FOR THE FUTURE</div>
+      <input id="tc-name" type="text" placeholder="Your name" maxlength="30" style="width:100%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:50px;padding:14px 24px;color:#fff;font-size:0.65rem;letter-spacing:3px;font-family:'Courier New',monospace;outline:none;margin-bottom:12px;">
+      <textarea id="tc-msg" placeholder="Write your message to the future..." maxlength="280" style="width:100%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:20px;padding:16px 24px;color:#fff;font-size:0.65rem;letter-spacing:2px;font-family:'Courier New',monospace;outline:none;resize:none;height:100px;margin-bottom:12px;"></textarea>
+      <div style="display:flex;gap:10px;align-items:center;margin-bottom:20px;flex-wrap:wrap;justify-content:center;">
+        <label style="font-size:0.5rem;letter-spacing:3px;color:#336655;">OPEN ON:</label>
+        <input id="tc-date" type="date" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:50px;padding:10px 20px;color:#fff;font-size:0.6rem;font-family:'Courier New',monospace;outline:none;letter-spacing:2px;">
+      </div>
+      <button onclick="sealCapsule()" style="padding:14px 40px;background:linear-gradient(135deg,#44ffaa,#ffcc00);border:none;color:#000;font-size:0.7rem;font-weight:900;letter-spacing:5px;cursor:pointer;border-radius:50px;font-family:'Courier New',monospace;">🔒 SEAL IT</button>
+    </div>
+    <!-- CAPSULE VAULT -->
+    <div style="font-size:0.5rem;letter-spacing:6px;color:#223322;margin-bottom:20px;">📦 THE VAULT</div>
+    <div id="tc-vault" style="display:flex;flex-direction:column;gap:12px;"></div>
+  </div>
+</section>
+
+<!-- KID QUEST BOARD -->
+<section id="quests" style="padding:80px 20px;border-top:1px solid #44ffaa22;position:relative;z-index:1;text-align:center;">
+  <div style="max-width:900px;margin:0 auto;">
+    <div style="font-size:0.5rem;letter-spacing:8px;color:#114433;margin-bottom:16px;">REAL MISSIONS · REAL KIDS</div>
+    <div style="font-size:clamp(1.2rem,4vw,2rem);font-weight:900;letter-spacing:8px;background:linear-gradient(135deg,#44ffaa,#ffcc00,#ff4444);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:40px;">⚔️ KID QUEST BOARD</div>
+    <div style="background:rgba(68,255,170,0.03);border:1px solid rgba(68,255,170,0.15);border-radius:20px;padding:32px;margin-bottom:32px;">
+      <div style="font-size:0.55rem;letter-spacing:5px;color:#22aa66;margin-bottom:20px;">POST A QUEST</div>
+      <div style="display:flex;flex-direction:column;gap:12px;max-width:500px;margin:0 auto;">
+        <input id="q-name" type="text" placeholder="Your name" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:50px;padding:12px 20px;color:#fff;font-size:0.6rem;letter-spacing:2px;font-family:'Courier New',monospace;outline:none;">
+        <input id="q-title" type="text" placeholder="Quest title (e.g. HELP ME CLEAN THE PARK)" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:50px;padding:12px 20px;color:#fff;font-size:0.6rem;letter-spacing:2px;font-family:'Courier New',monospace;outline:none;">
+        <select id="q-type" style="background:#030308;border:1px solid rgba(255,255,255,0.08);border-radius:50px;padding:12px 20px;color:#fff;font-size:0.6rem;letter-spacing:2px;font-family:'Courier New',monospace;outline:none;">
+          <option value="🌍 EARTH">🌍 EARTH QUEST</option>
+          <option value="🤝 KINDNESS">🤝 KINDNESS QUEST</option>
+          <option value="🎨 CREATE">🎨 CREATE QUEST</option>
+          <option value="📚 LEARN">📚 LEARN QUEST</option>
+          <option value="⚡ CHALLENGE">⚡ CHALLENGE QUEST</option>
+        </select>
+        <textarea id="q-desc" placeholder="Describe your quest..." rows="3" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:12px 20px;color:#fff;font-size:0.6rem;letter-spacing:2px;font-family:'Courier New',monospace;outline:none;resize:none;"></textarea>
+        <button onclick="postQuest()" style="padding:14px;background:linear-gradient(135deg,#44ffaa,#ffcc00);border:none;border-radius:50px;color:#000;font-size:0.65rem;font-weight:900;letter-spacing:4px;cursor:pointer;font-family:'Courier New',monospace;">⚔️ POST QUEST</button>
+      </div>
+    </div>
+    <div id="quest-board" style="display:flex;flex-direction:column;gap:16px;"></div>
   </div>
 </section>
 
@@ -1001,6 +1050,52 @@ function submitNews(){
 }
 renderNews();
 
+// KID QUEST BOARD
+let quests=JSON.parse(localStorage.getItem('kr_quests')||'[]');
+function renderQuests(){
+  const board=document.getElementById('quest-board');
+  if(!board)return;
+  if(quests.length===0){board.innerHTML='<div style="font-size:0.55rem;letter-spacing:4px;color:#113322;padding:40px;">NO QUESTS YET. BE THE FIRST TO POST ONE. ⚔️</div>';return;}
+  board.innerHTML='';
+  quests.slice().reverse().forEach((q,i)=>{
+    const idx=quests.length-1-i;
+    const typeColors={'🌍 EARTH':'#44ffaa','🤝 KINDNESS':'#ff44aa','🎨 CREATE':'#cc44ff','📚 LEARN':'#4488ff','⚡ CHALLENGE':'#ffcc00'};
+    const col=typeColors[q.type]||'#44ffaa';
+    const div=document.createElement('div');
+    div.style.cssText=`background:rgba(255,255,255,0.02);border:1px solid ${col}22;border-left:3px solid ${col};border-radius:16px;padding:24px 28px;text-align:left;`;
+    div.innerHTML=`
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;flex-wrap:wrap;gap:8px;">
+        <span style="font-size:0.45rem;letter-spacing:4px;color:${col};background:${col}11;padding:4px 12px;border-radius:50px;">${q.type}</span>
+        <span style="font-size:0.45rem;letter-spacing:3px;color:#222233;">${q.accepted||0} HEROES ACCEPTED</span>
+      </div>
+      <div style="font-size:0.75rem;font-weight:900;letter-spacing:4px;color:#fff;margin-bottom:6px;">${q.title}</div>
+      <div style="font-size:0.55rem;letter-spacing:2px;color:#555577;line-height:1.9;margin-bottom:16px;">${q.desc}</div>
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
+        <span style="font-size:0.45rem;letter-spacing:3px;color:#333344;">POSTED BY ${q.name.toUpperCase()}</span>
+        <button onclick="acceptQuest(${idx})" style="padding:8px 20px;background:linear-gradient(135deg,${col},#ffcc00);border:none;border-radius:50px;color:#000;font-size:0.5rem;font-weight:900;letter-spacing:3px;cursor:pointer;font-family:'Courier New',monospace;">⚔️ ACCEPT</button>
+      </div>`;
+    board.appendChild(div);
+  });
+}
+function postQuest(){
+  const name=sanitize(document.getElementById('q-name').value.trim());
+  const title=sanitize(document.getElementById('q-title').value.trim());
+  const desc=sanitize(document.getElementById('q-desc').value.trim());
+  const type=document.getElementById('q-type').value;
+  if(!name||!title||!desc)return;
+  quests.push({name,title,desc,type,accepted:0,ts:Date.now()});
+  localStorage.setItem('kr_quests',JSON.stringify(quests));
+  document.getElementById('q-name').value='';
+  document.getElementById('q-title').value='';
+  document.getElementById('q-desc').value='';
+  renderQuests();
+  earnCoins(name,5,'posted a quest');
+}
+function acceptQuest(idx){
+  if(quests[idx]){quests[idx].accepted=(quests[idx].accepted||0)+1;localStorage.setItem('kr_quests',JSON.stringify(quests));renderQuests();}
+}
+renderQuests();
+
 // HALL OF FAME
 (function initHOF(){
   const members=JSON.parse(localStorage.getItem('kr_rising')||'[]');
@@ -1051,6 +1146,48 @@ renderNews();
     });
   }
 })();
+
+// TIME CAPSULE
+let capsules=JSON.parse(localStorage.getItem('kr_capsules')||'[]');
+function sealCapsule(){
+  const name=sanitize(document.getElementById('tc-name').value.trim());
+  if(!name)return;
+  const msg=sanitize(document.getElementById('tc-msg').value.trim());
+  if(!msg)return;
+  const dateVal=document.getElementById('tc-date').value;
+  if(!dateVal){alert('Pick a future date to open your capsule!');return;}
+  const openDate=new Date(dateVal);
+  if(openDate<=new Date()){alert('Pick a date in the future!');return;}
+  capsules.push({name,msg,openDate:dateVal,sealed:new Date().toISOString()});
+  localStorage.setItem('kr_capsules',JSON.stringify(capsules));
+  document.getElementById('tc-name').value='';
+  document.getElementById('tc-msg').value='';
+  document.getElementById('tc-date').value='';
+  renderCapsules();
+}
+function renderCapsules(){
+  const vault=document.getElementById('tc-vault');
+  vault.innerHTML='';
+  if(!capsules.length){vault.innerHTML='<div style="font-size:0.5rem;letter-spacing:4px;color:#112211;padding:20px;">NO CAPSULES YET. SEAL THE FIRST ONE. 🔒</div>';return;}
+  [...capsules].reverse().forEach(c=>{
+    const now=new Date();
+    const open=new Date(c.openDate);
+    const unlocked=now>=open;
+    const diff=open-now;
+    const days=Math.ceil(diff/(1000*60*60*24));
+    const el=document.createElement('div');
+    el.style.cssText=`background:rgba(68,255,170,0.02);border:1px solid rgba(68,255,170,${unlocked?'0.4':'0.08'});border-radius:16px;padding:24px;text-align:left;`;
+    if(unlocked){
+      el.innerHTML=`<div style="font-size:0.45rem;letter-spacing:4px;color:#44ffaa;margin-bottom:8px;">🔓 UNLOCKED · FROM ${c.name.toUpperCase()} · SEALED ${new Date(c.sealed).toLocaleDateString().toUpperCase()}</div><div style="font-size:0.65rem;letter-spacing:2px;color:#fff;line-height:2;">"${c.msg}"</div>`;
+    } else {
+      el.innerHTML=`<div style="font-size:0.45rem;letter-spacing:4px;color:#336644;margin-bottom:8px;">🔒 SEALED BY ${c.name.toUpperCase()} · OPENS IN ${days} DAY${days!==1?'S':''}</div><div style="font-size:0.6rem;letter-spacing:3px;color:#223322;line-height:2;">★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★</div><div style="font-size:0.45rem;letter-spacing:3px;color:#223322;margin-top:8px;">OPENS ${open.toDateString().toUpperCase()}</div>`;
+    }
+    vault.appendChild(el);
+  });
+}
+// set min date to tomorrow
+(function(){const d=new Date();d.setDate(d.getDate()+1);document.getElementById('tc-date').min=d.toISOString().split('T')[0];})();
+renderCapsules();
 
 // DAILY PROPHECY
 const PROPHECIES=[
