@@ -111,6 +111,7 @@ footer p{font-size:0.5rem;letter-spacing:3px;color:#222233;margin-top:8px;}
     <a class="nav-btn outline" href="#planet">🪐 PLANET</a>
     <a class="nav-btn outline" href="#kidchat">💬 CHAT</a>
     <a class="nav-btn outline" href="#kidnews">📡 NEWS</a>
+    <a class="nav-btn outline" href="#halloffame">👑 FAME</a>
     <a class="nav-btn outline" href="#prophecy">🔮 PROPHECY</a>
     <a class="nav-btn fill" href="#join">⚡ JOIN</a>
     <select id="lang-select" onchange="translatePage(this.value)" style="background:#0a0a14;border:1px solid rgba(255,255,255,0.1);border-radius:50px;padding:8px 14px;color:#fff;font-size:0.55rem;font-family:'Courier New',monospace;outline:none;cursor:pointer;">
@@ -284,6 +285,50 @@ footer p{font-size:0.5rem;letter-spacing:3px;color:#222233;margin-top:8px;}
   <div style="max-width:700px;margin:0 auto;">
     <div style="text-align:center;font-size:0.6rem;letter-spacing:5px;color:#333355;margin-bottom:24px;">📰 LATEST STORIES</div>
     <div id="news-feed"></div>
+  </div>
+</section>
+
+<!-- HALL OF FAME -->
+<section id="halloffame" style="padding:80px 20px;border-top:1px solid #ffcc0022;position:relative;z-index:1;text-align:center;">
+  <div style="max-width:900px;margin:0 auto;">
+    <div style="font-size:0.5rem;letter-spacing:8px;color:#443300;margin-bottom:16px;">THE GREATEST KIDS ON EARTH</div>
+    <div style="font-size:clamp(1.2rem,4vw,2rem);font-weight:900;letter-spacing:8px;background:linear-gradient(135deg,#ffcc00,#ff4444,#cc44ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:40px;">👑 HALL OF FAME</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;margin-bottom:32px;">
+      <!-- TOP COIN EARNER -->
+      <div style="background:rgba(255,204,0,0.04);border:1px solid rgba(255,204,0,0.2);border-radius:20px;padding:32px 24px;">
+        <div style="font-size:2rem;margin-bottom:8px;">🪙</div>
+        <div style="font-size:0.45rem;letter-spacing:5px;color:#554400;margin-bottom:12px;">RICHEST KID</div>
+        <div id="hof-coins" style="font-size:1rem;font-weight:900;letter-spacing:4px;color:#ffcc00;">—</div>
+        <div id="hof-coins-val" style="font-size:0.5rem;letter-spacing:3px;color:#443300;margin-top:4px;"></div>
+      </div>
+      <!-- TOP WARRIOR -->
+      <div style="background:rgba(255,68,0,0.04);border:1px solid rgba(255,68,0,0.2);border-radius:20px;padding:32px 24px;">
+        <div style="font-size:2rem;margin-bottom:8px;">⚔️</div>
+        <div style="font-size:0.45rem;letter-spacing:5px;color:#441100;margin-bottom:12px;">STRONGEST WARRIOR</div>
+        <div id="hof-war" style="font-size:1rem;font-weight:900;letter-spacing:4px;color:#ff4400;">—</div>
+        <div id="hof-war-val" style="font-size:0.5rem;letter-spacing:3px;color:#441100;margin-top:4px;"></div>
+      </div>
+      <!-- TOP REPORTER -->
+      <div style="background:rgba(68,136,255,0.04);border:1px solid rgba(68,136,255,0.2);border-radius:20px;padding:32px 24px;">
+        <div style="font-size:2rem;margin-bottom:8px;">📡</div>
+        <div style="font-size:0.45rem;letter-spacing:5px;color:#001144;margin-bottom:12px;">TOP REPORTER</div>
+        <div id="hof-news" style="font-size:1rem;font-weight:900;letter-spacing:4px;color:#4488ff;">—</div>
+        <div id="hof-news-val" style="font-size:0.5rem;letter-spacing:3px;color:#001144;margin-top:4px;"></div>
+      </div>
+      <!-- TOP ASTRONAUT -->
+      <div style="background:rgba(204,68,255,0.04);border:1px solid rgba(204,68,255,0.2);border-radius:20px;padding:32px 24px;">
+        <div style="font-size:2rem;margin-bottom:8px;">🚀</div>
+        <div style="font-size:0.45rem;letter-spacing:5px;color:#330044;margin-bottom:12px;">STAR EXPLORER</div>
+        <div id="hof-space" style="font-size:1rem;font-weight:900;letter-spacing:4px;color:#cc44ff;">—</div>
+        <div id="hof-space-val" style="font-size:0.5rem;letter-spacing:3px;color:#330044;margin-top:4px;"></div>
+      </div>
+    </div>
+    <!-- LEGEND WALL -->
+    <div style="background:rgba(255,255,255,0.01);border:1px solid rgba(255,255,255,0.06);border-radius:20px;padding:32px;">
+      <div style="font-size:0.5rem;letter-spacing:6px;color:#333355;margin-bottom:20px;">⭐ WALL OF LEGENDS ⭐</div>
+      <div id="hof-wall" style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;"></div>
+      <div style="margin-top:24px;font-size:0.45rem;letter-spacing:3px;color:#222233;">JOIN KIDRISING · EARN KR COINS · FIGHT IN KID WAR · POST NEWS · LAUNCH INTO SPACE · BECOME LEGEND</div>
+    </div>
   </div>
 </section>
 
@@ -927,6 +972,57 @@ function submitNews(){
   document.getElementById('news-story').value='';
 }
 renderNews();
+
+// HALL OF FAME
+(function initHOF(){
+  const members=JSON.parse(localStorage.getItem('kr_rising')||'[]');
+  const coins=JSON.parse(localStorage.getItem('kr_coins')||'{}');
+  const war=JSON.parse(localStorage.getItem('kr_war')||'[]');
+  const news=JSON.parse(localStorage.getItem('kr_news')||'[]');
+  const astronauts=JSON.parse(localStorage.getItem('kr_astronauts')||'[]');
+
+  // richest kid by coins
+  let richest=null,richCoins=0;
+  Object.entries(coins).forEach(([name,c])=>{if(c>richCoins){richCoins=c;richest=name;}});
+  document.getElementById('hof-coins').textContent=richest?'👑 '+richest.toUpperCase():'BE FIRST';
+  document.getElementById('hof-coins-val').textContent=richest?richCoins+' KR COINS':'JOIN & EARN';
+
+  // strongest warrior (most war posts)
+  const warCount={};
+  war.forEach(w=>{const n=(w.name||'').toUpperCase();if(n)warCount[n]=(warCount[n]||0)+1;});
+  const topWarrior=Object.entries(warCount).sort((a,b)=>b[1]-a[1])[0];
+  document.getElementById('hof-war').textContent=topWarrior?'👑 '+topWarrior[0]:'BE FIRST';
+  document.getElementById('hof-war-val').textContent=topWarrior?topWarrior[1]+' BATTLE MOVES':'FIGHT IN KID WAR';
+
+  // top reporter
+  const newsCount={};
+  news.forEach(n=>{const nm=(n.author||n.name||'').toUpperCase();if(nm)newsCount[nm]=(newsCount[nm]||0)+1;});
+  const topReporter=Object.entries(newsCount).sort((a,b)=>b[1]-a[1])[0];
+  document.getElementById('hof-news').textContent=topReporter?'👑 '+topReporter[0]:'BE FIRST';
+  document.getElementById('hof-news-val').textContent=topReporter?topReporter[1]+' STORIES POSTED':'POST A NEWS STORY';
+
+  // star explorer (most missions)
+  const missionCount={};
+  astronauts.forEach(a=>{const n=(a.name||'').toUpperCase();if(n)missionCount[n]=(missionCount[n]||0)+1;});
+  const topAstronaut=Object.entries(missionCount).sort((a,b)=>b[1]-a[1])[0];
+  document.getElementById('hof-space').textContent=topAstronaut?'👑 '+topAstronaut[0]:'BE FIRST';
+  document.getElementById('hof-space-val').textContent=topAstronaut?topAstronaut[1]+' MISSIONS':'LAUNCH INTO SPACE';
+
+  // wall of legends — all members
+  const wall=document.getElementById('hof-wall');
+  if(members.length===0){
+    wall.innerHTML='<div style="font-size:0.55rem;letter-spacing:4px;color:#222233;padding:20px;">NO LEGENDS YET. JOIN KIDRISING TO BE THE FIRST. ⚡</div>';
+  } else {
+    members.slice(-30).reverse().forEach(m=>{
+      const isLegend=richest&&m.name&&m.name.toUpperCase()===richest.toUpperCase();
+      const chip=document.createElement('div');
+      chip.style.cssText='padding:8px 18px;border-radius:50px;font-size:0.5rem;letter-spacing:3px;border:1px solid rgba(255,255,255,0.08);color:#aaa;background:rgba(255,255,255,0.02);';
+      if(isLegend){chip.style.borderColor='rgba(255,204,0,0.4)';chip.style.color='#ffcc00';chip.style.background='rgba(255,204,0,0.06)';}
+      chip.textContent=(isLegend?'👑 ':'')+(m.name||'ANONYMOUS').toUpperCase();
+      wall.appendChild(chip);
+    });
+  }
+})();
 
 // DAILY PROPHECY
 const PROPHECIES=[
