@@ -286,6 +286,51 @@ footer p{font-size:0.5rem;letter-spacing:3px;color:#222233;margin-top:8px;}
   </div>
 </section>
 
+<!-- AVATAR CREATOR -->
+<section id="avatar" style="padding:100px 20px;border-top:1px solid #cc44ff22;position:relative;z-index:1;text-align:center;">
+  <div style="max-width:800px;margin:0 auto;">
+    <div style="font-size:0.6rem;letter-spacing:8px;color:#442266;margin-bottom:16px;">KIDRISING PRESENTS</div>
+    <div style="font-size:clamp(1.5rem,6vw,3rem);font-weight:900;letter-spacing:8px;background:linear-gradient(135deg,#cc44ff,#ffcc00,#ff44aa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:8px;">🐉😇 WING AVATAR</div>
+    <div style="font-size:0.55rem;letter-spacing:5px;color:#333355;margin-bottom:48px;">EVERY KID GETS ANGEL DRAGON WINGS. DESIGN YOURS.</div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:700px;margin:0 auto;">
+      <!-- Controls -->
+      <div style="background:rgba(204,68,255,0.03);border:1px solid rgba(204,68,255,0.12);border-radius:24px;padding:28px;text-align:left;">
+        <div style="font-size:0.6rem;letter-spacing:4px;color:#cc44ff;margin-bottom:20px;">✏️ DESIGN YOUR AVATAR</div>
+        <label style="font-size:0.5rem;letter-spacing:3px;color:#555577;display:block;margin-bottom:6px;">YOUR NAME</label>
+        <input id="av-name" type="text" placeholder="Enter your name" oninput="updateAvatar()" style="width:100%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:50px;padding:10px 16px;color:#fff;font-size:0.6rem;letter-spacing:2px;font-family:'Courier New',monospace;outline:none;margin-bottom:12px;">
+        <label style="font-size:0.5rem;letter-spacing:3px;color:#555577;display:block;margin-bottom:6px;">🐉 DRAGON WING COLOR</label>
+        <input type="color" id="av-dragon" value="#ff4400" oninput="updateAvatar()" style="width:100%;height:40px;border:none;border-radius:12px;cursor:pointer;background:transparent;margin-bottom:12px;">
+        <label style="font-size:0.5rem;letter-spacing:3px;color:#555577;display:block;margin-bottom:6px;">😇 ANGEL WING GLOW</label>
+        <input type="color" id="av-angel" value="#ffcc00" oninput="updateAvatar()" style="width:100%;height:40px;border:none;border-radius:12px;cursor:pointer;background:transparent;margin-bottom:12px;">
+        <label style="font-size:0.5rem;letter-spacing:3px;color:#555577;display:block;margin-bottom:6px;">⚡ FACTION</label>
+        <select id="av-faction" oninput="updateAvatar()" style="width:100%;background:#0a0a14;border:1px solid rgba(255,255,255,0.1);border-radius:50px;padding:10px 16px;color:#fff;font-size:0.6rem;font-family:'Courier New',monospace;outline:none;margin-bottom:16px;">
+          <option value="#ff4400">🔥 FIRE</option>
+          <option value="#4488ff">⚡ STORM</option>
+          <option value="#44ffaa">🌍 EARTH</option>
+          <option value="#cc44ff">🌑 SHADOW</option>
+          <option value="#ffcc00">👑 ADMIN</option>
+        </select>
+        <button onclick="saveAvatar()" style="width:100%;padding:12px;background:linear-gradient(135deg,#cc44ff,#ff44aa);border:none;color:#fff;font-size:0.65rem;font-weight:900;letter-spacing:4px;cursor:pointer;border-radius:50px;font-family:'Courier New',monospace;">💾 SAVE AVATAR</button>
+        <div id="av-confirm" style="display:none;margin-top:12px;font-size:0.55rem;letter-spacing:3px;color:#cc44ff;text-align:center;"></div>
+      </div>
+
+      <!-- Preview -->
+      <div style="background:rgba(0,0,0,0.3);border:1px solid rgba(255,255,255,0.06);border-radius:24px;padding:28px;display:flex;flex-direction:column;align-items:center;justify-content:center;">
+        <div style="font-size:0.5rem;letter-spacing:4px;color:#333355;margin-bottom:20px;">👁️ PREVIEW</div>
+        <canvas id="avatar-canvas" width="200" height="200" style="border-radius:16px;"></canvas>
+        <div id="av-name-display" style="margin-top:12px;font-size:0.7rem;font-weight:900;letter-spacing:4px;color:#fff;"></div>
+      </div>
+    </div>
+
+    <!-- Avatar Wall -->
+    <div style="margin-top:48px;">
+      <div style="font-size:0.5rem;letter-spacing:5px;color:#333355;margin-bottom:24px;">🐉 AVATAR WALL — ALL KIDRISING KIDS</div>
+      <div id="avatar-wall" style="display:flex;flex-wrap:wrap;gap:16px;justify-content:center;"></div>
+    </div>
+  </div>
+</section>
+
 <!-- KIDRISING SHELTER -->
 <section id="shelter" style="padding:100px 20px;border-top:1px solid #ff444433;position:relative;z-index:1;text-align:center;">
   <div style="max-width:800px;margin:0 auto;">
@@ -867,6 +912,80 @@ function submitNews(){
   document.getElementById('news-story').value='';
 }
 renderNews();
+
+// AVATAR CREATOR
+let avatars=JSON.parse(localStorage.getItem('kr_avatars')||'[]');
+function drawAvatar(canvas,name,dragon,angel,faction){
+  const ctx=canvas.getContext('2d');
+  const w=canvas.width,h=canvas.height;
+  ctx.clearRect(0,0,w,h);
+  // Background
+  ctx.fillStyle='#030308';ctx.fillRect(0,0,w,h);
+  // Glow
+  const g=ctx.createRadialGradient(w/2,h/2,0,w/2,h/2,80);
+  g.addColorStop(0,angel+'44');g.addColorStop(1,'transparent');
+  ctx.fillStyle=g;ctx.fillRect(0,0,w,h);
+  // Dragon wing (left)
+  ctx.save();ctx.translate(60,h/2);
+  ctx.beginPath();ctx.moveTo(0,0);ctx.bezierCurveTo(-60,-80,-80,-20,-40,40);ctx.bezierCurveTo(-20,60,0,20,0,0);
+  ctx.fillStyle=dragon+'cc';ctx.fill();
+  ctx.strokeStyle=dragon;ctx.lineWidth=2;ctx.stroke();
+  ctx.restore();
+  // Angel wing (right)
+  ctx.save();ctx.translate(w-60,h/2);
+  ctx.beginPath();ctx.moveTo(0,0);ctx.bezierCurveTo(60,-80,80,-20,40,40);ctx.bezierCurveTo(20,60,0,20,0,0);
+  ctx.fillStyle=angel+'cc';ctx.fill();
+  ctx.strokeStyle=angel;ctx.lineWidth=2;ctx.stroke();
+  ctx.restore();
+  // Body (kid)
+  ctx.fillStyle=faction;
+  ctx.beginPath();ctx.arc(w/2,h/2-10,22,0,Math.PI*2);ctx.fill();
+  // Face
+  ctx.fillStyle='#ffddaa';
+  ctx.beginPath();ctx.arc(w/2,h/2-10,18,0,Math.PI*2);ctx.fill();
+  // Eyes
+  ctx.fillStyle='#333';
+  ctx.beginPath();ctx.arc(w/2-6,h/2-14,3,0,Math.PI*2);ctx.fill();
+  ctx.beginPath();ctx.arc(w/2+6,h/2-14,3,0,Math.PI*2);ctx.fill();
+  // Smile
+  ctx.beginPath();ctx.arc(w/2,h/2-8,8,0.2,Math.PI-0.2);ctx.strokeStyle='#333';ctx.lineWidth=2;ctx.stroke();
+  // Name
+  if(name){ctx.fillStyle='#fff';ctx.font='bold 11px Courier New';ctx.textAlign='center';ctx.fillText(name.toUpperCase().slice(0,10),w/2,h/2+40);}
+}
+function updateAvatar(){
+  const canvas=document.getElementById('avatar-canvas');
+  const name=document.getElementById('av-name').value;
+  const dragon=document.getElementById('av-dragon').value;
+  const angel=document.getElementById('av-angel').value;
+  const faction=document.getElementById('av-faction').value;
+  document.getElementById('av-name-display').textContent=name.toUpperCase();
+  document.getElementById('av-name-display').style.color=faction;
+  drawAvatar(canvas,name,dragon,angel,faction);
+}
+function saveAvatar(){
+  const name=document.getElementById('av-name').value.trim();
+  if(!name){alert('Enter your name first!');return;}
+  const dragon=document.getElementById('av-dragon').value;
+  const angel=document.getElementById('av-angel').value;
+  const faction=document.getElementById('av-faction').value;
+  const canvas=document.getElementById('avatar-canvas');
+  const img=canvas.toDataURL();
+  avatars=avatars.filter(a=>a.name.toLowerCase()!==name.toLowerCase());
+  avatars.push({name,dragon,angel,faction,img});
+  localStorage.setItem('kr_avatars',JSON.stringify(avatars));
+  renderAvatarWall();
+  const c=document.getElementById('av-confirm');
+  c.style.display='block';
+  c.innerHTML=`🐉 ${name.toUpperCase()}'S AVATAR SAVED!`;
+  for(let i=0;i<8;i++)spawnParticle();
+}
+function renderAvatarWall(){
+  const wall=document.getElementById('avatar-wall');
+  if(!avatars.length){wall.innerHTML='<div style="font-size:0.55rem;color:#222233;letter-spacing:3px;">No avatars yet. Be the first!</div>';return;}
+  wall.innerHTML=avatars.map(a=>`<div style="text-align:center;"><img src="${a.img}" style="width:80px;height:80px;border-radius:12px;border:2px solid ${a.faction}44;"><div style="font-size:0.45rem;letter-spacing:2px;color:${a.faction};margin-top:4px;">${a.name.toUpperCase()}</div></div>`).join('');
+}
+updateAvatar();
+renderAvatarWall();
 
 // WORLD GOVERNMENT
 let wgVotes=JSON.parse(localStorage.getItem('kr_wg_votes')||'{"STOP BULLYING":0,"SAVE THE PLANET":0,"END HUNGER":0,"PROTECT DISABLED KIDS":0}');
