@@ -813,14 +813,34 @@ footer p{font-size:0.5rem;letter-spacing:3px;color:#222233;margin-top:8px;}
   </div>
 </section>
 
-<section id="join">
+<section id="join" style="padding:100px 20px;position:relative;z-index:1;text-align:center;">
   <div class="join-title">JOIN THE RISING</div>
   <div class="join-sub">BE PART OF SOMETHING BIGGER THAN ANYTHING</div>
-  <div class="join-form">
-    <input class="join-input" id="j-name" type="text" placeholder="Your first name">
-    <input class="join-input" id="j-country" type="text" placeholder="Your country">
-    <button class="join-btn" onclick="joinRising()">⚡ RISE UP</button>
+  <div id="join-form-wrap">
+    <div class="join-form">
+      <input class="join-input" id="j-name" type="text" placeholder="Your first name">
+      <input class="join-input" id="j-country" type="text" placeholder="Your country">
+      <button class="join-btn" onclick="showOath()">⚡ RISE UP</button>
+    </div>
   </div>
+  <!-- OATH SCREEN -->
+  <div id="oath-screen" style="display:none;max-width:600px;margin:0 auto;">
+    <div style="font-size:3rem;margin-bottom:16px;">⚡</div>
+    <div style="font-size:clamp(1rem,4vw,1.8rem);font-weight:900;letter-spacing:8px;background:linear-gradient(135deg,#ffcc00,#ff4444);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:32px;">THE KIDRISING OATH</div>
+    <div style="background:rgba(255,204,0,0.03);border:1px solid rgba(255,204,0,0.15);border-radius:20px;padding:40px 32px;text-align:left;margin-bottom:32px;">
+      <div style="font-size:0.7rem;letter-spacing:4px;color:#ccaa44;line-height:3.2;" id="oath-lines">
+        <div>⚡ I WILL BE KIND TO EVERY KID ON EARTH.</div>
+        <div>⚡ I WILL STAND UP FOR THOSE WHO CANNOT STAND.</div>
+        <div>⚡ I WILL BUILD, NOT DESTROY.</div>
+        <div>⚡ I WILL USE MY VOICE FOR GOOD.</div>
+        <div>⚡ I WILL NEVER GIVE UP ON A BETTER WORLD.</div>
+        <div>⚡ I AM KIDRISING.</div>
+      </div>
+    </div>
+    <div style="font-size:0.55rem;letter-spacing:5px;color:#444433;margin-bottom:24px;">PLACE YOUR HAND ON YOUR HEART AND REPEAT THE OATH.</div>
+    <button class="join-btn" onclick="swearOath()" style="font-size:0.8rem;padding:18px 48px;background:linear-gradient(135deg,#ffcc00,#ff4444);">I SWEAR ⚡</button>
+  </div>
+  <!-- WELCOME SCREEN -->
   <div class="join-confirm" id="join-confirm"></div>
 </section>
 <footer>
@@ -898,19 +918,27 @@ function drawBG(){
 drawBG();
 let members=JSON.parse(localStorage.getItem('kr_rising')||'[]');
 document.getElementById('c-kids').textContent=members.length||1;
-function joinRising(){
+function showOath(){
   const name=document.getElementById('j-name').value.trim();
   const country=document.getElementById('j-country').value.trim();
   if(!name||!country){alert('Please enter your name and country!');return;}
+  document.getElementById('join-form-wrap').style.display='none';
+  document.getElementById('oath-screen').style.display='block';
+}
+function swearOath(){
+  const name=document.getElementById('j-name').value.trim();
+  const country=document.getElementById('j-country').value.trim();
   members.push({name,country});
   localStorage.setItem('kr_rising',JSON.stringify(members));
   document.getElementById('c-kids').textContent=members.length;
+  document.getElementById('oath-screen').style.display='none';
   const c=document.getElementById('join-confirm');
   c.style.display='block';
-  c.innerHTML=`⚡ WELCOME TO KIDRISING, ${name.toUpperCase()}!<br><span style="font-size:0.5rem;letter-spacing:3px;color:#555544;">RISER #${members.length} · THE REVOLUTION HAS BEGUN</span>`;
+  c.innerHTML=`<div style="font-size:3rem;margin-bottom:16px;">👑</div><div style="font-size:clamp(0.8rem,3vw,1.4rem);font-weight:900;letter-spacing:6px;background:linear-gradient(135deg,#ffcc00,#ff4444);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:12px;">OATH SWORN.</div><div style="font-size:0.7rem;letter-spacing:4px;color:#ffcc00;margin-bottom:8px;">WELCOME, ${name.toUpperCase()}.</div><div style="font-size:0.5rem;letter-spacing:3px;color:#443300;">RISER #${members.length} · FROM ${country.toUpperCase()} · THE REVOLUTION HAS YOU.</div>`;
   document.getElementById('j-name').value='';document.getElementById('j-country').value='';
-  for(let i=0;i<12;i++) spawnParticle();
+  for(let i=0;i<20;i++) spawnParticle();
 }
+function joinRising(){showOath();}
 function spawnParticle(){
   const p=document.createElement('div');p.className='rise-particle';
   const colors=['#ffcc00','#ff4444','#cc44ff','#4488ff','#44ffaa','#ff44aa'];
