@@ -112,6 +112,7 @@ footer p{font-size:0.5rem;letter-spacing:3px;color:#222233;margin-top:8px;}
     <a class="nav-btn outline" href="#kidchat">💬 CHAT</a>
     <a class="nav-btn outline" href="#kidnews">📡 NEWS</a>
     <a class="nav-btn outline" href="#timecapsule">🕰️ CAPSULE</a>
+    <a class="nav-btn outline" href="#sos">🚨 SOS</a>
     <a class="nav-btn outline" href="#badges">🏆 BADGES</a>
     <a class="nav-btn outline" href="#quests">⚔️ QUESTS</a>
     <a class="nav-btn outline" href="#halloffame">👑 FAME</a>
@@ -197,7 +198,7 @@ footer p{font-size:0.5rem;letter-spacing:3px;color:#222233;margin-top:8px;}
       <span class="uc-tag" style="background:rgba(204,68,255,0.15);color:#cc44ff;">MOVIE</span>
       <span class="uc-emoji">🎬</span>
       <div class="uc-name">STAND UP</div>
-      <div class="uc-desc" style="color:#9966aa;">1.3 billion disabled superheroes rise up. Written and directed by Oliver Vo, age 10.</div>
+      <div class="uc-desc" style="color:#9966aa;">1.3 billion disabled superheroes rise up. Written and directed by Oliver, age 10.</div>
       <span class="uc-btn" style="background:rgba(204,68,255,0.2);color:#cc44ff;">WATCH NOW →</span>
     </a>
     <a href="https://oliveryvo-cmd.github.io/povp-game" target="_blank" class="universe-card" style="background:linear-gradient(135deg,#200000,#100000);border:1px solid #ff444422;">
@@ -219,7 +220,7 @@ footer p{font-size:0.5rem;letter-spacing:3px;color:#222233;margin-top:8px;}
 <section id="founder">
   <div class="founder-card">
     <div class="founder-emoji">👦</div>
-    <div class="founder-name">OLIVER VO</div>
+    <div class="founder-name">OLIVER</div>
     <div class="founder-title">FOUNDER OF KIDRISING · AGE 10 · LADERA RANCH, USA</div>
     <div class="founder-quote">"I am 10 years old and I am building a new civilization for kids.<br><br>Not a website. Not a game. A whole new way of living — where every kid matters, every voice is heard, and kindness is the law.<br><br>This is just the beginning."</div>
   </div>
@@ -446,6 +447,34 @@ footer p{font-size:0.5rem;letter-spacing:3px;color:#222233;margin-top:8px;}
 @keyframes tickerScroll{0%{transform:translateX(100vw);}100%{transform:translateX(-100%);}}
 </style>
 
+<!-- KID SOS SIGNAL -->
+<section id="sos" style="padding:80px 20px;border-top:1px solid #ff444422;position:relative;z-index:1;text-align:center;">
+  <div style="max-width:900px;margin:0 auto;">
+    <div style="font-size:0.5rem;letter-spacing:8px;color:#440011;margin-bottom:16px;">KIDS HELPING KIDS · WORLDWIDE</div>
+    <div style="font-size:clamp(1.2rem,4vw,2rem);font-weight:900;letter-spacing:8px;background:linear-gradient(135deg,#ff4444,#ffcc00);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:12px;">🚨 KID SOS SIGNAL</div>
+    <div style="font-size:0.5rem;letter-spacing:4px;color:#333344;margin-bottom:36px;">NEED HELP? SEND A SIGNAL. KIDRISING WILL RESPOND.</div>
+    <div style="background:rgba(255,68,68,0.04);border:1px solid rgba(255,68,68,0.2);border-radius:20px;padding:32px;margin-bottom:32px;max-width:560px;margin-left:auto;margin-right:auto;">
+      <div style="font-size:0.55rem;letter-spacing:5px;color:#aa2222;margin-bottom:20px;">SEND YOUR SIGNAL</div>
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <input id="sos-name" type="text" placeholder="Your username" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:50px;padding:12px 20px;color:#fff;font-size:0.6rem;letter-spacing:2px;font-family:'Courier New',monospace;outline:none;">
+        <select id="sos-type" style="background:#030308;border:1px solid rgba(255,255,255,0.08);border-radius:50px;padding:12px 20px;color:#fff;font-size:0.6rem;letter-spacing:2px;font-family:'Courier New',monospace;outline:none;">
+          <option value="🤝 NEED A FRIEND">🤝 I NEED A FRIEND</option>
+          <option value="😢 FEELING SAD">😢 I AM FEELING SAD</option>
+          <option value="🌍 MY COMMUNITY NEEDS HELP">🌍 MY COMMUNITY NEEDS HELP</option>
+          <option value="📚 I NEED HELP LEARNING">📚 I NEED HELP LEARNING</option>
+          <option value="⚡ I HAVE AN IDEA BUT NEED HELP">⚡ I HAVE AN IDEA BUT NEED HELP</option>
+          <option value="🏠 I NEED SHELTER INFO">🏠 I NEED SHELTER INFO</option>
+        </select>
+        <textarea id="sos-msg" placeholder="Tell KidRising what you need..." rows="3" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:12px 20px;color:#fff;font-size:0.6rem;letter-spacing:2px;font-family:'Courier New',monospace;outline:none;resize:none;"></textarea>
+        <button onclick="sendSOS()" style="padding:16px;background:linear-gradient(135deg,#ff4444,#ff8800);border:none;border-radius:50px;color:#fff;font-size:0.7rem;font-weight:900;letter-spacing:5px;cursor:pointer;font-family:'Courier New',monospace;animation:sosPulse 1.5s ease-in-out infinite;">🚨 SEND SIGNAL</button>
+      </div>
+    </div>
+    <!-- LIVE SIGNAL BOARD -->
+    <div style="font-size:0.5rem;letter-spacing:5px;color:#330011;margin-bottom:20px;">📡 LIVE SIGNAL BOARD — KIDS WHO NEED HELP RIGHT NOW</div>
+    <div id="sos-board" style="display:flex;flex-direction:column;gap:14px;"></div>
+  </div>
+</section>
+
 <!-- DAILY PROPHECY -->
 <section id="prophecy" style="padding:80px 20px;border-top:1px solid #cc44ff22;position:relative;z-index:1;text-align:center;">
   <div style="max-width:640px;margin:0 auto;">
@@ -610,7 +639,7 @@ footer p{font-size:0.5rem;letter-spacing:3px;color:#222233;margin-top:8px;}
 <!-- PLANET KIDRISING -->
 <section id="planet" style="padding:100px 20px;border-top:1px solid #44ffaa22;position:relative;z-index:1;text-align:center;">
   <div style="max-width:900px;margin:0 auto;">
-    <div style="font-size:0.6rem;letter-spacing:8px;color:#224433;margin-bottom:16px;">DISCOVERED BY OLIVER VO · AGE 10 · YEAR 2026</div>
+    <div style="font-size:0.6rem;letter-spacing:8px;color:#224433;margin-bottom:16px;">DISCOVERED BY OLIVER · AGE 10 · YEAR 2026</div>
     <div style="font-size:clamp(1.5rem,6vw,3.5rem);font-weight:900;letter-spacing:8px;background:linear-gradient(135deg,#44ffaa,#4488ff,#cc44ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:8px;">🪐 PLANET KIDRISING</div>
     <div style="font-size:0.55rem;letter-spacing:5px;color:#333355;margin-bottom:60px;">A WORLD BUILT BY KIDS. ONE PIECE AT A TIME.</div>
 
@@ -689,7 +718,7 @@ footer p{font-size:0.5rem;letter-spacing:3px;color:#222233;margin-top:8px;}
       </div>
       <div style="padding:24px;">
         <div style="font-size:0.9rem;font-weight:900;letter-spacing:4px;color:#fff;margin-bottom:8px;">STAND UP — EPISODE 1</div>
-        <div style="font-size:0.55rem;letter-spacing:3px;color:#ff44aa;">WRITTEN & DIRECTED BY OLIVER VO · AGE 10</div>
+        <div style="font-size:0.55rem;letter-spacing:3px;color:#ff44aa;">WRITTEN & DIRECTED BY OLIVER · AGE 10</div>
         <div style="font-size:0.55rem;letter-spacing:2px;color:#553344;margin-top:8px;">1.3 billion disabled superheroes rise up. The first movie ever made for KidRising.</div>
       </div>
     </div>
@@ -802,7 +831,7 @@ footer p{font-size:0.5rem;letter-spacing:3px;color:#222233;margin-top:8px;}
 
     <div style="border-top:1px solid rgba(255,204,0,0.15);padding-top:32px;">
       <div style="font-size:0.5rem;letter-spacing:4px;color:#554400;margin-bottom:16px;">SIGNED BY THE FOUNDER</div>
-      <div style="font-size:2rem;font-weight:900;letter-spacing:8px;color:#ffcc00;">OLIVER VO</div>
+      <div style="font-size:2rem;font-weight:900;letter-spacing:8px;color:#ffcc00;">OLIVER</div>
       <div style="font-size:0.55rem;letter-spacing:4px;color:#554400;margin-top:8px;">FOUNDER & PRESIDENT · AGE 10 · LADERA RANCH, USA · JUNE 2026</div>
       <div style="font-size:0.5rem;letter-spacing:3px;color:#332200;margin-top:8px;">THE SOVEREIGN NATION OF KIDRISING · ESTABLISHED 2026</div>
     </div>
@@ -917,7 +946,7 @@ footer p{font-size:0.5rem;letter-spacing:3px;color:#222233;margin-top:8px;}
 <section id="admin-panel" style="display:none;padding:80px 20px;border-top:1px solid #ff444422;position:relative;z-index:1;">
   <div style="max-width:700px;margin:0 auto;">
     <div style="text-align:center;font-size:clamp(1rem,4vw,2rem);font-weight:900;letter-spacing:8px;color:#ff4444;margin-bottom:8px;">🛡️ ADMIN PANEL</div>
-    <div style="text-align:center;font-size:0.55rem;letter-spacing:4px;color:#441111;margin-bottom:40px;">OLIVER VO · FOUNDER · KIDRISING</div>
+    <div style="text-align:center;font-size:0.55rem;letter-spacing:4px;color:#441111;margin-bottom:40px;">OLIVER · FOUNDER · KIDRISING</div>
     <div style="font-size:0.65rem;letter-spacing:4px;color:#ff4444;margin-bottom:16px;">📰 ALL NEWS STORIES</div>
     <div id="admin-news-list"></div>
     <div style="font-size:0.65rem;letter-spacing:4px;color:#ff4444;margin-top:32px;margin-bottom:16px;">💰 ALL COIN CLAIMS</div>
@@ -959,7 +988,7 @@ footer p{font-size:0.5rem;letter-spacing:3px;color:#222233;margin-top:8px;}
 </section>
 <footer>
   <div class="footer-logo">KIDRISING</div>
-  <p>FOUNDED BY OLIVER VO · AGE 10 · LADERA RANCH, USA · KIDSREBELLION GAMES</p>
+  <p>FOUNDED BY OLIVER · AGE 10 · LADERA RANCH, USA · KIDSREBELLION GAMES</p>
   <p style="margin-top:8px;">A NEW CIVILIZATION BUILT BY KIDS · FOR EVERY HUMAN ON EARTH · FREE FOREVER</p>
 </footer>
 <script>
@@ -1123,7 +1152,7 @@ const ALL_BADGES=[
   {id:'astronaut',emoji:'🚀',name:'ASTRONAUT',desc:'Launched into space',check:n=>JSON.parse(localStorage.getItem('kr_astronauts')||'[]').some(a=>a.name&&a.name.toLowerCase()===n.toLowerCase())},
   {id:'questgiver',emoji:'🗺️',name:'QUEST GIVER',desc:'Posted a quest',check:n=>JSON.parse(localStorage.getItem('kr_quests')||'[]').some(q=>q.name&&q.name.toLowerCase()===n.toLowerCase())},
   {id:'rich',emoji:'🪙',name:'COIN LORD',desc:'Earned 10+ KR Coins',check:n=>{const c=JSON.parse(localStorage.getItem('kr_coins')||'{}');return Object.entries(c).some(([k,v])=>k.toLowerCase()===n.toLowerCase()&&v>=10);}},
-  {id:'founder',emoji:'👑',name:'FOUNDER',desc:'Oliver Vo — founder of KidRising',check:n=>n.toLowerCase()==='oliver'},
+  {id:'founder',emoji:'👑',name:'FOUNDER',desc:'Oliver — founder of KidRising',check:n=>n.toLowerCase()==='oliver'},
   {id:'legend',emoji:'🌟',name:'LEGEND',desc:'Earned 5 or more badges',check:()=>false}, // computed after
 ];
 function getBadges(name){
@@ -1152,6 +1181,48 @@ function lookupBadges(){
     wrap.appendChild(div);
   });
 })();
+
+// KID SOS SIGNAL
+let sosList=JSON.parse(localStorage.getItem('kr_sos')||'[]');
+function renderSOS(){
+  const board=document.getElementById('sos-board');
+  if(!board)return;
+  if(sosList.length===0){board.innerHTML='<div style="font-size:0.55rem;letter-spacing:4px;color:#220011;padding:40px;">NO ACTIVE SIGNALS. ALL KIDS ARE OK. 💚</div>';return;}
+  board.innerHTML='';
+  sosList.slice().reverse().forEach((s,i)=>{
+    const idx=sosList.length-1-i;
+    const div=document.createElement('div');
+    div.style.cssText='background:rgba(255,68,68,0.03);border:1px solid rgba(255,68,68,0.15);border-left:3px solid #ff4444;border-radius:16px;padding:20px 24px;text-align:left;';
+    const responded=s.responses||0;
+    div.innerHTML=`
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;flex-wrap:wrap;gap:8px;">
+        <span style="font-size:0.45rem;letter-spacing:4px;color:#ff4444;background:rgba(255,68,68,0.08);padding:4px 12px;border-radius:50px;">${s.type}</span>
+        <span style="font-size:0.45rem;letter-spacing:3px;color:#222233;">${responded} KID${responded!==1?'S':''} RESPONDED</span>
+      </div>
+      <div style="font-size:0.65rem;letter-spacing:3px;color:#ffaaaa;margin-bottom:6px;">${s.msg}</div>
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-top:12px;">
+        <span style="font-size:0.45rem;letter-spacing:3px;color:#331111;">SIGNAL FROM ${s.name.toUpperCase()}</span>
+        <button onclick="respondSOS(${idx})" style="padding:8px 20px;background:linear-gradient(135deg,#44ffaa,#4488ff);border:none;border-radius:50px;color:#000;font-size:0.5rem;font-weight:900;letter-spacing:3px;cursor:pointer;font-family:'Courier New',monospace;">💚 I'LL HELP</button>
+      </div>`;
+    board.appendChild(div);
+  });
+}
+function sendSOS(){
+  const name=sanitize(document.getElementById('sos-name').value.trim());
+  const msg=sanitize(document.getElementById('sos-msg').value.trim());
+  const type=document.getElementById('sos-type').value;
+  if(!name||!msg){alert('Please fill in your username and message!');return;}
+  sosList.push({name,msg,type,responses:0,ts:Date.now()});
+  localStorage.setItem('kr_sos',JSON.stringify(sosList));
+  document.getElementById('sos-name').value='';
+  document.getElementById('sos-msg').value='';
+  renderSOS();
+  alert('🚨 YOUR SIGNAL HAS BEEN SENT. KIDRISING IS WITH YOU.');
+}
+function respondSOS(idx){
+  if(sosList[idx]){sosList[idx].responses=(sosList[idx].responses||0)+1;localStorage.setItem('kr_sos',JSON.stringify(sosList));renderSOS();}
+}
+renderSOS();
 
 // KID QUEST BOARD
 let quests=JSON.parse(localStorage.getItem('kr_quests')||'[]');
