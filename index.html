@@ -106,7 +106,7 @@ footer p{font-size:0.5rem;letter-spacing:3px;color:#222233;margin-top:8px;}
     <a class="nav-btn outline" href="#universe">🎮 UNIVERSE</a>
     <a class="nav-btn outline" href="#worldgov">🌍 VOTE</a>
     <a class="nav-btn outline" href="#krtv">📺 TV</a>
-    <a class="nav-btn outline" href="#kidwar">⚔️ WAR</a>
+    <a class="nav-btn outline" href="#kidrivals">⚔️ WAR</a>
     <a class="nav-btn outline" href="#space">🚀 SPACE</a>
     <a class="nav-btn outline" href="#planet">🪐 PLANET</a>
     <a class="nav-btn outline" href="#kidchat">💬 CHAT</a>
@@ -331,7 +331,7 @@ footer p{font-size:0.5rem;letter-spacing:3px;color:#222233;margin-top:8px;}
     <div style="background:rgba(255,255,255,0.01);border:1px solid rgba(255,255,255,0.06);border-radius:20px;padding:32px;">
       <div style="font-size:0.5rem;letter-spacing:6px;color:#333355;margin-bottom:20px;">⭐ WALL OF LEGENDS ⭐</div>
       <div id="hof-wall" style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;"></div>
-      <div style="margin-top:24px;font-size:0.45rem;letter-spacing:3px;color:#222233;">JOIN KIDRISING · EARN KR COINS · FIGHT IN KID WAR · POST NEWS · LAUNCH INTO SPACE · BECOME LEGEND</div>
+      <div style="margin-top:24px;font-size:0.45rem;letter-spacing:3px;color:#222233;">JOIN KIDRISING · EARN KR COINS · FIGHT IN KID RIVALS · POST NEWS · LAUNCH INTO SPACE · BECOME LEGEND</div>
     </div>
   </div>
 </section>
@@ -838,10 +838,10 @@ footer p{font-size:0.5rem;letter-spacing:3px;color:#222233;margin-top:8px;}
   </div>
 </section>
 
-<!-- KID WAR -->
-<section id="kidwar" style="padding:100px 20px;border-top:1px solid #ff440022;position:relative;z-index:1;">
+<!-- KID RIVALS -->
+<section id="kidrivals" style="padding:100px 20px;border-top:1px solid #ff440022;position:relative;z-index:1;">
   <div style="text-align:center;margin-bottom:48px;">
-    <div style="font-size:clamp(1.2rem,5vw,2.5rem);font-weight:900;letter-spacing:8px;margin-bottom:8px;background:linear-gradient(135deg,#ff4400,#ffcc00,#ff4444);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">⚔️ KID WAR</div>
+    <div style="font-size:clamp(1.2rem,5vw,2.5rem);font-weight:900;letter-spacing:8px;margin-bottom:8px;background:linear-gradient(135deg,#ff4400,#ffcc00,#ff4444);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">⚔️ KID RIVALS</div>
     <div style="font-size:0.55rem;letter-spacing:5px;color:#333355;">PICK YOUR FACTION. INVADE. CONQUER THE WORLD.</div>
   </div>
 
@@ -1147,7 +1147,7 @@ renderNews();
 // KID BADGES
 const ALL_BADGES=[
   {id:'riser',emoji:'⚡',name:'RISER',desc:'Joined KidRising',check:n=>members.some(m=>m.name&&m.name.toLowerCase()===n.toLowerCase())},
-  {id:'warrior',emoji:'⚔️',name:'WARRIOR',desc:'Made a move in Kid War',check:n=>JSON.parse(localStorage.getItem('kr_war')||'[]').some(w=>w.name&&w.name.toLowerCase()===n.toLowerCase())},
+  {id:'warrior',emoji:'⚔️',name:'WARRIOR',desc:'Made a move in Kid Rivals',check:n=>JSON.parse(localStorage.getItem('kr_war')||'[]').some(w=>w.name&&w.name.toLowerCase()===n.toLowerCase())},
   {id:'reporter',emoji:'📡',name:'REPORTER',desc:'Posted a news story',check:n=>JSON.parse(localStorage.getItem('kr_news')||'[]').some(w=>(w.author||w.name||'').toLowerCase()===n.toLowerCase())},
   {id:'astronaut',emoji:'🚀',name:'ASTRONAUT',desc:'Launched into space',check:n=>JSON.parse(localStorage.getItem('kr_astronauts')||'[]').some(a=>a.name&&a.name.toLowerCase()===n.toLowerCase())},
   {id:'questgiver',emoji:'🗺️',name:'QUEST GIVER',desc:'Posted a quest',check:n=>JSON.parse(localStorage.getItem('kr_quests')||'[]').some(q=>q.name&&q.name.toLowerCase()===n.toLowerCase())},
@@ -1289,7 +1289,7 @@ renderQuests();
   war.forEach(w=>{const n=(w.name||'').toUpperCase();if(n)warCount[n]=(warCount[n]||0)+1;});
   const topWarrior=Object.entries(warCount).sort((a,b)=>b[1]-a[1])[0];
   document.getElementById('hof-war').textContent=topWarrior?'👑 '+topWarrior[0]:'BE FIRST';
-  document.getElementById('hof-war-val').textContent=topWarrior?topWarrior[1]+' BATTLE MOVES':'FIGHT IN KID WAR';
+  document.getElementById('hof-war-val').textContent=topWarrior?topWarrior[1]+' BATTLE MOVES':'FIGHT IN KID RIVALS';
 
   // top reporter
   const newsCount={};
@@ -1618,7 +1618,7 @@ function submitMission(){
 }
 renderSpace();
 
-// KID WAR
+// KID RIVALS
 const FACTIONS={FIRE:{emoji:'🔥',color:'#ff4400'},STORM:{emoji:'⚡',color:'#4488ff'},EARTH:{emoji:'🌍',color:'#44ffaa'},SHADOW:{emoji:'🌑',color:'#cc44ff'},ADMIN:{emoji:'👑',color:'#ffcc00'}};
 let warData=JSON.parse(localStorage.getItem('kr_war')||'{"territories":{"FIRE":5,"STORM":5,"EARTH":5,"SHADOW":5,"ADMIN":5},"log":[],"coins":{"FIRE":0,"STORM":0,"EARTH":0,"SHADOW":0,"ADMIN":0}}');
 let myFaction=localStorage.getItem('kr_my_faction')||null;
